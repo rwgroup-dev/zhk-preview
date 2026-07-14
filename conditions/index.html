@@ -1,0 +1,1912 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="RWGroup — редизайн блока «Условия покупки и параметры дома», 5 направлений на 3 разрешениях.">
+<title>Редизайн блока «Условия покупки» — 5 направлений · RWGroup</title>
+</head>
+<body>
+<style>
+
+:root{
+  --bg:#eef1f4; --bg2:#e6eaee; --panel:#ffffff; --ink:#10161d; --ink2:#33414d;
+  --muted:#5d6b78; --line:#dbe1e7; --line2:#e8edf1; --gold:#9a7b45; --chip:#f2f4f7;
+  --shadow:0 1px 2px rgba(16,22,29,.04),0 18px 40px -28px rgba(16,22,29,.28);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0a0e13; --bg2:#0e141b; --panel:#111922; --ink:#e9eef3; --ink2:#c2ccd5;
+    --muted:#8a99a6; --line:#202c37; --line2:#1a242e; --gold:#c2a87a; --chip:#161f29;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 26px 60px -34px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="light"]{
+  --bg:#eef1f4; --bg2:#e6eaee; --panel:#ffffff; --ink:#10161d; --ink2:#33414d;
+  --muted:#5d6b78; --line:#dbe1e7; --line2:#e8edf1; --gold:#9a7b45; --chip:#f2f4f7;
+  --shadow:0 1px 2px rgba(16,22,29,.04),0 18px 40px -28px rgba(16,22,29,.28);
+}
+:root[data-theme="dark"]{
+  --bg:#0a0e13; --bg2:#0e141b; --panel:#111922; --ink:#e9eef3; --ink2:#c2ccd5;
+  --muted:#8a99a6; --line:#202c37; --line2:#1a242e; --gold:#c2a87a; --chip:#161f29;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 26px 60px -34px rgba(0,0,0,.8);
+}
+
+.page{
+  min-height:100%;
+  background:
+    radial-gradient(120% 80% at 100% 0%, color-mix(in srgb,var(--gold) 7%, transparent), transparent 60%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  padding:clamp(20px,4vw,56px) clamp(16px,4vw,56px) 80px;
+}
+.wrap{max-width:1320px;margin:0 auto;}
+
+.masthead{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:8px;}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
+.eyebrow::before{content:'';width:26px;height:1px;background:var(--gold);display:inline-block;}
+.h1{font-family:Georgia,'Times New Roman',serif;font-weight:600;font-size:clamp(27px,4.6vw,46px);line-height:1.08;letter-spacing:-.015em;margin:16px 0 0;max-width:22ch;text-wrap:balance;}
+.h1 em{font-style:italic;color:var(--gold);}
+.lede{margin:16px 0 0;max-width:66ch;color:var(--ink2);font-size:clamp(14px,1.4vw,16px);line-height:1.6;}
+.legend{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px 10px;}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:12.5px;color:var(--ink2);}
+.pill b{color:var(--ink);font-variant-numeric:tabular-nums;font-weight:600;}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+
+.variant{margin-top:clamp(44px,6vw,76px);}
+.vhead{display:flex;flex-wrap:wrap;align-items:flex-start;gap:16px 22px;padding-bottom:20px;border-bottom:1px solid var(--line2);}
+.vindex{font-family:Georgia,serif;font-size:clamp(30px,4vw,46px);line-height:1;color:var(--gold);font-variant-numeric:tabular-nums;flex-shrink:0;opacity:.9;}
+.vmeta{flex:1 1 320px;min-width:0;}
+.vname{font-family:Georgia,'Times New Roman',serif;font-weight:600;font-size:clamp(20px,2.6vw,27px);line-height:1.12;margin:2px 0 0;letter-spacing:-.01em;}
+.vtag{margin-top:7px;font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);}
+.vrat{margin:12px 0 0;max-width:74ch;color:var(--ink2);font-size:14px;line-height:1.62;}
+.vswatch{display:flex;gap:0;margin-top:2px;flex-shrink:0;}
+.vswatch span{width:30px;height:30px;border:1px solid var(--line);}
+.vswatch span:first-child{border-radius:8px 0 0 8px;}
+.vswatch span:last-child{border-radius:0 8px 8px 0;border-left:none;}
+.vswatch span:not(:first-child):not(:last-child){border-left:none;}
+
+.stage{margin-top:26px;display:flex;flex-direction:column;gap:26px;}
+.rail{display:flex;gap:26px;overflow-x:auto;padding:6px 2px 18px;scrollbar-width:thin;}
+.rail.desk{padding-bottom:8px;}
+.device{flex:0 0 auto;}
+.dlabel{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:11px;}
+.dlabel .dw{color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:.04em;}
+.dlabel .bar{flex:1;height:1px;background:var(--line);}
+.viewport{container-type:inline-size;border-radius:8px;box-shadow:var(--shadow);overflow:hidden;outline:1px solid var(--line);}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+}
+
+.footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;line-height:1.6;max-width:80ch;}
+.footer code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;background:var(--chip);padding:2px 6px;border-radius:5px;color:var(--ink2);}
+
+/* ===== v1 : Тёмное золото ===== */
+.v1-root{container-type:inline-size;width:100%;box-sizing:border-box;position:relative;overflow:hidden;background:#071520;color:#EAF1F5;padding:clamp(22px,5cqi,46px);border:1px solid rgba(194,168,122,.14);border-radius:6px;box-shadow:0 34px 90px -50px rgba(0,0,0,.85);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+.v1-root *{box-sizing:border-box;}
+.v1-root::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(194,168,122,.55),transparent);z-index:2;}
+.v1-root .v1-glow{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(120% 90% at 100% -10%,rgba(194,168,122,.12),transparent 55%),radial-gradient(90% 80% at -10% 110%,rgba(14,165,233,.05),transparent 60%);}
+
+/* MASTHEAD */
+.v1-root .v1-masthead{position:relative;z-index:1;display:flex;flex-direction:column;gap:20px;padding-bottom:clamp(20px,3.5cqi,28px);border-bottom:1px solid rgba(194,168,122,.18);}
+.v1-root .v1-title{margin:0;max-width:20ch;font-size:clamp(19px,4.2cqi,26px);line-height:1.16;font-weight:600;letter-spacing:-.01em;color:#EAF1F5;}
+.v1-root .v1-meta{display:flex;gap:0;}
+.v1-root .v1-meta-item{display:flex;flex-direction:column;gap:4px;padding:2px 0;}
+.v1-root .v1-meta-item+.v1-meta-item{margin-left:18px;padding-left:18px;border-left:1px solid rgba(194,168,122,.28);}
+.v1-root .v1-meta-label{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:#8FA3AE;}
+.v1-root .v1-meta-value{font-size:13.5px;font-weight:500;color:#C2A87A;font-variant-numeric:tabular-nums;}
+
+/* BODY */
+.v1-root .v1-body{position:relative;z-index:1;margin-top:clamp(26px,5cqi,42px);display:grid;gap:28px;grid-template-columns:1fr;grid-template-areas:"hero" "specs" "chips";}
+.v1-root .v1-hero{grid-area:hero;display:flex;flex-direction:column;gap:12px;}
+.v1-root .v1-hero-label{position:relative;padding-left:28px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:#C2A87A;}
+.v1-root .v1-hero-label::before{content:'';position:absolute;left:0;top:50%;width:20px;height:1px;background:#C2A87A;transform:translateY(-50%);}
+.v1-root .v1-hero-price{display:flex;align-items:baseline;gap:.14em;white-space:nowrap;font-size:clamp(34px,8.6cqi,54px);line-height:.94;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:#C2A87A;background:linear-gradient(176deg,#E7D3AB 0%,#C2A87A 58%,#A88A57 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;}
+.v1-root .v1-cur{font-size:.52em;font-weight:600;}
+
+/* SPECS */
+.v1-root .v1-specs{grid-area:specs;display:grid;grid-template-columns:1fr;margin:0;}
+.v1-root .v1-spec{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:15px 0;border-top:1px solid rgba(194,168,122,.14);}
+.v1-root .v1-spec:first-child{border-top:none;padding-top:2px;}
+.v1-root .v1-spec-label{margin:0;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.13em;color:#8FA3AE;}
+.v1-root .v1-spec-value{margin:0;text-align:right;font-size:clamp(16px,3cqi,19px);font-weight:500;color:#EAF1F5;font-variant-numeric:tabular-nums;}
+
+/* CHIPS */
+.v1-root .v1-chips{grid-area:chips;list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px;}
+.v1-root .v1-chip{display:inline-flex;align-items:center;gap:12px;padding:9px 18px 9px 10px;border:1px solid rgba(194,168,122,.34);border-radius:999px;background:linear-gradient(180deg,rgba(194,168,122,.07),rgba(194,168,122,0));transition:border-color .25s ease,background .25s ease,transform .25s ease;}
+.v1-root .v1-chip:hover{border-color:rgba(194,168,122,.62);background:linear-gradient(180deg,rgba(194,168,122,.14),rgba(194,168,122,.02));transform:translateY(-1px);}
+.v1-root .v1-chip-glyph{flex-shrink:0;width:32px;height:32px;display:grid;place-items:center;border-radius:50%;border:1px solid rgba(194,168,122,.42);color:#C2A87A;transition:border-color .25s ease;}
+.v1-root .v1-chip:hover .v1-chip-glyph{border-color:rgba(194,168,122,.7);}
+.v1-root .v1-chip-glyph svg{width:16px;height:16px;display:block;}
+.v1-root .v1-chip-text{display:flex;flex-direction:column;gap:3px;line-height:1;}
+.v1-root .v1-chip-label{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#8FA3AE;}
+.v1-root .v1-chip-value{font-size:14px;font-weight:500;color:#EAF1F5;font-variant-numeric:tabular-nums;}
+
+/* TABLET */
+@container (min-width:700px){
+.v1-root .v1-masthead{flex-direction:row;align-items:flex-end;justify-content:space-between;gap:32px;}
+.v1-root .v1-meta{flex-shrink:0;}
+.v1-root .v1-body{grid-template-columns:1fr 1fr;column-gap:clamp(28px,4cqi,44px);row-gap:32px;grid-template-areas:"hero specs" "chips chips";align-items:start;}
+}
+
+/* DESKTOP */
+@container (min-width:1000px){
+.v1-root .v1-body{grid-template-columns:.9fr 1.1fr;column-gap:clamp(36px,4.5cqi,60px);row-gap:30px;grid-template-areas:"hero specs" "chips specs";align-items:start;}
+.v1-root .v1-specs{align-self:stretch;align-content:center;grid-template-columns:1fr 1fr;padding-left:clamp(30px,4cqi,54px);border-left:1px solid rgba(194,168,122,.18);}
+.v1-root .v1-spec{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:10px;padding:20px 24px;border-top:1px solid rgba(194,168,122,.14);}
+.v1-root .v1-spec:nth-child(-n+2){border-top:none;padding-top:0;}
+.v1-root .v1-spec:nth-child(odd){padding-left:0;}
+.v1-root .v1-spec:nth-child(even){border-left:1px solid rgba(194,168,122,.14);padding-left:28px;}
+.v1-root .v1-spec-value{text-align:left;font-size:clamp(20px,2.3cqi,24px);}
+.v1-root .v1-chips{flex-direction:column;align-items:stretch;gap:10px;}
+.v1-root .v1-chip{justify-content:flex-start;}
+}
+
+/* ===== v2 : Асимметричная бенто-сетка ===== */
+.v2-root *{box-sizing:border-box;}
+.v2-root{
+  container-type:inline-size;
+  width:100%;
+  --gold:#C2A87A; --gold-soft:#DCC79C; --ink:#F4F1EA; --muted:#8CA0AA;
+  --hair:rgba(255,255,255,.07); --hair-gold:rgba(194,168,122,.26);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(194,168,122,.09), transparent 55%),
+    radial-gradient(100% 80% at 0% 100%, rgba(14,165,233,.05), transparent 50%),
+    linear-gradient(160deg,#0b1c27,#071520);
+  border:1px solid rgba(194,168,122,.15);
+  border-radius:22px;
+  padding:16px;
+  box-shadow:0 26px 64px -32px rgba(0,0,0,.85);
+}
+
+/* ── header band ── */
+.v2-root .v2-band{
+  display:flex; flex-wrap:wrap; align-items:center; gap:12px 16px;
+  padding:4px 6px 16px; margin-bottom:14px;
+  border-bottom:1px solid var(--hair);
+}
+.v2-root .v2-title{
+  margin:0; flex:1 1 240px;
+  font-size:15px; line-height:1.28; font-weight:650; letter-spacing:-.01em;
+  color:var(--ink); position:relative; padding-left:12px;
+}
+.v2-root .v2-title::before{
+  content:''; position:absolute; left:0; top:2px; bottom:2px; width:3px;
+  border-radius:2px; background:linear-gradient(var(--gold),rgba(194,168,122,.18));
+}
+.v2-root .v2-chips{display:flex; flex-wrap:wrap; gap:8px;}
+.v2-root .v2-chip{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px 12px; border-radius:999px;
+  background:rgba(194,168,122,.08);
+  border:1px solid var(--hair-gold); white-space:nowrap;
+}
+.v2-root .v2-chip-k{font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); font-weight:600;}
+.v2-root .v2-chip-v{font-size:12px; color:var(--gold-soft); font-weight:650;}
+
+/* ── bento grid (base = mobile, 1 col) ── */
+.v2-root .v2-bento{display:grid; grid-template-columns:1fr; gap:10px;}
+.v2-root .v2-tile{
+  position:relative; overflow:hidden;
+  display:flex; flex-direction:column; justify-content:space-between; gap:12px;
+  min-height:96px; padding:15px 16px; border-radius:16px;
+  border:1px solid var(--hair); background:#0e2230;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03), 0 10px 24px -16px rgba(0,0,0,.7);
+  transition:transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s ease, border-color .25s ease;
+}
+.v2-root .v2-tile:hover{
+  transform:translateY(-3px); border-color:var(--hair-gold);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 18px 34px -18px rgba(0,0,0,.85);
+}
+
+/* tile weight rhythm */
+.v2-root .v2-area{background:#08181f;}
+.v2-root .v2-floors{background:#0f2635;}
+.v2-root .v2-sales{background:#0f2635;}
+.v2-root .v2-time{background:#07151c;}
+.v2-root .v2-kreml{background:#0f2635;}
+.v2-root .v2-park{background:#08181f;}
+.v2-root .v2-metro{
+  background:linear-gradient(150deg, rgba(194,168,122,.18), rgba(194,168,122,.05)), #0c2030;
+  border-color:var(--hair-gold);
+}
+.v2-root .v2-price{
+  background:linear-gradient(155deg,#143247,#0b2231 60%,#0a1e2b);
+  border-color:rgba(194,168,122,.30); min-height:152px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 22px 42px -22px rgba(0,0,0,.9);
+}
+
+/* labels */
+.v2-root .v2-label{
+  font-size:10px; text-transform:uppercase; letter-spacing:.085em;
+  font-weight:700; color:var(--muted); line-height:1.3; position:relative; z-index:2;
+}
+.v2-root .v2-metro .v2-label,
+.v2-root .v2-price .v2-label{color:var(--gold-soft);}
+
+/* generic value */
+.v2-root .v2-val{display:flex; align-items:baseline; flex-wrap:wrap; gap:3px; position:relative; z-index:2;}
+.v2-root .v2-big{font-size:1.5rem; font-weight:650; color:var(--ink); font-variant-numeric:tabular-nums; letter-spacing:-.01em; line-height:1;}
+.v2-root .v2-unit{font-size:.72rem; color:var(--gold); font-weight:600;}
+.v2-root .v2-pre{font-size:.78rem; color:var(--muted); font-weight:600;}
+.v2-root .v2-sep{color:var(--muted); font-weight:400;}
+
+/* price feature */
+.v2-root .v2-price-top{display:flex; flex-direction:column; gap:6px; position:relative; z-index:2;}
+.v2-root .v2-accent{width:34px; height:3px; border-radius:2px; background:linear-gradient(90deg,var(--gold),rgba(194,168,122,0));}
+.v2-root .v2-price-row{display:flex; align-items:baseline; gap:6px; position:relative; z-index:2;}
+.v2-root .v2-price-num{font-size:2rem; font-weight:700; letter-spacing:-.02em; font-variant-numeric:tabular-nums; color:var(--ink); line-height:1;}
+.v2-root .v2-price-cur{font-size:1.15rem; font-weight:650; color:var(--gold);}
+.v2-root .v2-price-arc{position:absolute; top:-14px; right:-14px; width:132px; height:132px; z-index:1; pointer-events:none;}
+
+/* metro */
+.v2-root .v2-metro-body{display:flex; align-items:center; gap:12px; position:relative; z-index:2;}
+.v2-root .v2-mglyph{width:30px; height:26px; flex:none;}
+.v2-root .v2-metro-val{font-size:1.2rem; font-weight:650; color:var(--gold-soft); letter-spacing:-.01em; line-height:1.1;}
+
+/* sales + progress */
+.v2-root .v2-sales-head{display:flex; align-items:baseline; justify-content:space-between; gap:8px; position:relative; z-index:2;}
+.v2-root .v2-sales-val{font-size:1.45rem; font-weight:650; font-variant-numeric:tabular-nums; color:var(--ink); line-height:1;}
+.v2-root .v2-sales-pct{font-size:11px; font-weight:700; color:var(--gold); letter-spacing:.04em;}
+.v2-root .v2-bar{height:6px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden; position:relative; z-index:2;}
+.v2-root .v2-bar-fill{height:100%; width:100%; border-radius:99px; background:linear-gradient(90deg,#9c7f4e,var(--gold) 60%,var(--gold-soft)); box-shadow:0 0 10px rgba(194,168,122,.4);}
+
+/* time */
+.v2-root .v2-time-val{font-size:1.15rem; font-weight:650; color:var(--ink); font-variant-numeric:tabular-nums; letter-spacing:-.01em; line-height:1; position:relative; z-index:2;}
+.v2-root .v2-timeline{width:100%; max-width:64px; height:10px; position:relative; z-index:2;}
+
+/* kreml */
+.v2-root .v2-kreml-body{display:flex; align-items:center; gap:12px; position:relative; z-index:2;}
+.v2-root .v2-ring{width:42px; height:42px; flex:none;}
+
+/* park */
+.v2-root .v2-park-body{display:flex; align-items:center; gap:10px; position:relative; z-index:2;}
+.v2-root .v2-check{width:26px; height:26px; flex:none;}
+.v2-root .v2-park-val{font-size:1.5rem; font-weight:700; color:var(--ink); line-height:1;}
+
+/* ── TABLET (2 col) ── */
+@container (min-width:700px){
+  .v2-root{padding:22px;}
+  .v2-root .v2-title{font-size:16px;}
+  .v2-root .v2-bento{
+    grid-template-columns:1fr 1fr; gap:12px;
+    grid-template-areas:
+      "price price"
+      "area floors"
+      "sales sales"
+      "metro time"
+      "kreml park";
+  }
+  .v2-root .v2-price{grid-area:price;}
+  .v2-root .v2-area{grid-area:area;}
+  .v2-root .v2-floors{grid-area:floors;}
+  .v2-root .v2-sales{grid-area:sales;}
+  .v2-root .v2-metro{grid-area:metro;}
+  .v2-root .v2-time{grid-area:time;}
+  .v2-root .v2-kreml{grid-area:kreml;}
+  .v2-root .v2-park{grid-area:park;}
+  .v2-root .v2-price{
+    flex-direction:row; align-items:flex-end; justify-content:space-between;
+    min-height:0; padding:18px 22px;
+  }
+  .v2-root .v2-price-num{font-size:2.5rem;}
+  .v2-root .v2-price-cur{font-size:1.3rem;}
+}
+
+/* ── DESKTOP (dense 4 col bento) ── */
+@container (min-width:1000px){
+  .v2-root{padding:26px;}
+  .v2-root .v2-band{padding:4px 8px 18px; margin-bottom:18px;}
+  .v2-root .v2-title{font-size:18px;}
+  .v2-root .v2-bento{
+    grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:minmax(108px,auto);
+    gap:14px;
+    grid-template-areas:
+      "price price area  floors"
+      "price price sales sales"
+      "metro time  kreml park";
+  }
+  .v2-root .v2-price{
+    flex-direction:column; align-items:flex-start; justify-content:space-between;
+    min-height:0; padding:22px 24px;
+  }
+  .v2-root .v2-price-num{font-size:3rem;}
+  .v2-root .v2-price-cur{font-size:1.4rem;}
+  .v2-root .v2-big{font-size:1.7rem;}
+  .v2-root .v2-sales-val{font-size:1.75rem;}
+  .v2-root .v2-park-val{font-size:1.7rem;}
+  .v2-root .v2-metro-val{font-size:1.35rem;}
+  .v2-root .v2-time-val{font-size:1.3rem;}
+}
+
+/* ===== v3 : Швейцарский типографский паспорт ===== */
+.v3-root{
+  container-type:inline-size;
+  position:relative;
+  width:100%;
+  box-sizing:border-box;
+  background:#F6F3EC;
+  color:#111418;
+  border:1px solid rgba(17,20,24,.08);
+  box-shadow:0 14px 44px -26px rgba(17,20,24,.28);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+  --gold:#B08D57;
+  --ink:#111418;
+  --muted:#6B6459;
+  --hair:rgba(17,20,24,.16);
+  --hair-soft:rgba(17,20,24,.09);
+}
+.v3-root *,.v3-root *::before,.v3-root *::after{box-sizing:border-box;}
+
+.v3-root .v3-crop{position:absolute;width:16px;height:16px;color:var(--gold);opacity:.55;pointer-events:none;}
+.v3-root .v3-crop--tr{top:12px;right:12px;}
+.v3-root .v3-crop--bl{bottom:12px;left:12px;}
+
+.v3-root .v3-sheet{padding:30px 22px 28px;position:relative;}
+
+/* masthead */
+.v3-root .v3-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.v3-root .v3-eyebrow-range{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;}
+.v3-root .v3-eyebrow-line{flex:1;height:1px;background:var(--hair);}
+
+.v3-root .v3-title{
+  margin:0;
+  font-family:Georgia,'Times New Roman',serif;
+  font-weight:400;
+  font-size:clamp(1.68rem,6.2cqi,2.05rem);
+  line-height:1.08;
+  letter-spacing:-.01em;
+  color:var(--ink);
+  max-width:20ch;
+}
+.v3-root .v3-rule{position:relative;height:1px;background:var(--ink);margin:16px 0 14px;}
+.v3-root .v3-rule-gold{position:absolute;left:0;top:-1px;width:58px;height:3px;background:var(--gold);}
+
+.v3-root .v3-caption{display:flex;flex-wrap:wrap;gap:9px 26px;margin:0;}
+.v3-root .v3-cap{display:inline-flex;align-items:baseline;gap:9px;}
+.v3-root .v3-cap-k{font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);}
+.v3-root .v3-cap-v{font-size:13px;font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums;}
+
+/* lede — price */
+.v3-root .v3-lede{margin-top:28px;padding-top:22px;border-top:1px solid var(--ink);}
+.v3-root .v3-lede-meta{display:flex;align-items:baseline;gap:12px;margin-bottom:12px;}
+.v3-root .v3-index{font-size:12px;letter-spacing:.08em;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums;}
+.v3-root .v3-index--lede{color:var(--gold);}
+.v3-root .v3-label{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--muted);line-height:1.3;}
+.v3-root .v3-lede-price{margin:0;display:flex;align-items:baseline;gap:.16em;font-family:Georgia,'Times New Roman',serif;color:var(--ink);}
+.v3-root .v3-lede-num{font-size:clamp(2.15rem,11.5cqi,2.9rem);line-height:.92;letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+.v3-root .v3-lede-cur{font-size:clamp(1.25rem,5.5cqi,1.6rem);color:var(--gold);font-weight:400;}
+
+/* specs */
+.v3-root .v3-specs{margin:26px 0 0;padding:0;display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--hair);}
+.v3-root .v3-spec{padding:18px 0;border-top:1px solid var(--hair);}
+.v3-root .v3-spec-top{display:flex;align-items:baseline;gap:11px;margin:0 0 9px;}
+.v3-root .v3-value{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(1.5rem,6.4cqi,1.85rem);line-height:1;letter-spacing:-.01em;color:var(--ink);font-variant-numeric:tabular-nums;}
+.v3-root .v3-val-pre{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:.42em;letter-spacing:.06em;color:var(--muted);vertical-align:.2em;margin-right:.3em;}
+.v3-root .v3-unit{font-size:.5em;color:var(--muted);letter-spacing:0;margin-left:.16em;}
+.v3-root .v3-val-sep{color:var(--hair);font-size:.72em;padding:0 .08em;}
+
+/* metro & parking — understated tagged rows */
+.v3-root .v3-spec--tag .v3-value{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:1rem;line-height:1.2;}
+.v3-root .v3-tag{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid var(--hair);border-radius:2px;background:transparent;font-size:.95rem;font-weight:500;letter-spacing:.005em;color:var(--ink);}
+.v3-root .v3-tag svg{width:13px;height:13px;color:var(--gold);flex:none;}
+
+/* tablet — 2 spec columns */
+@container (min-width:700px){
+  .v3-root .v3-sheet{padding:44px 44px 42px;}
+  .v3-root .v3-eyebrow{margin-bottom:24px;}
+  .v3-root .v3-title{font-size:clamp(2.1rem,5cqi,2.55rem);}
+  .v3-root .v3-lede{display:flex;align-items:flex-end;justify-content:space-between;gap:34px;margin-top:32px;padding-top:24px;}
+  .v3-root .v3-lede-meta{flex-direction:column;align-items:flex-start;gap:7px;margin-bottom:0;}
+  .v3-root .v3-lede-num{font-size:clamp(2.7rem,7cqi,3.2rem);}
+  .v3-root .v3-lede-cur{font-size:clamp(1.5rem,3.6cqi,1.85rem);}
+  .v3-root .v3-specs{grid-template-columns:1fr 1fr;margin-top:30px;}
+  .v3-root .v3-spec{padding:22px 0;}
+  .v3-root .v3-spec:nth-child(2n+1){padding-right:30px;}
+  .v3-root .v3-spec:nth-child(2n){padding-left:30px;border-left:1px solid var(--hair);}
+  .v3-root .v3-value{font-size:clamp(1.5rem,3cqi,1.78rem);}
+  .v3-root .v3-spec--tag .v3-value{font-size:1rem;}
+}
+
+/* desktop — masthead + 3-col grid with vertical hairlines */
+@container (min-width:1000px){
+  .v3-root .v3-sheet{padding:62px 64px 58px;}
+  .v3-root .v3-title{font-size:clamp(2.55rem,4.2cqi,3.15rem);max-width:18ch;}
+  .v3-root .v3-rule{margin:20px 0 16px;}
+  .v3-root .v3-rule-gold{width:72px;}
+  .v3-root .v3-lede{gap:48px;margin-top:38px;padding-top:26px;}
+  .v3-root .v3-lede-num{font-size:clamp(3.1rem,5.2cqi,3.9rem);}
+  .v3-root .v3-lede-cur{font-size:clamp(1.7rem,2.6cqi,2.1rem);}
+  .v3-root .v3-specs{grid-template-columns:repeat(3,1fr);margin-top:34px;}
+  .v3-root .v3-spec{padding:26px 0;}
+  .v3-root .v3-spec:nth-child(3n+1){padding-left:0;padding-right:34px;border-left:0;}
+  .v3-root .v3-spec:nth-child(3n+2){padding-left:34px;padding-right:34px;border-left:1px solid var(--hair);}
+  .v3-root .v3-spec:nth-child(3n){padding-left:34px;padding-right:0;border-left:1px solid var(--hair);}
+  .v3-root .v3-value{font-size:clamp(1.65rem,2.3cqi,1.95rem);}
+  .v3-root .v3-spec--tag .v3-value{font-size:1.02rem;}
+}
+
+/* ===== v4 : Атмосферное стекло ===== */
+.v4-root{--v4-gold:#C2A87A;--v4-sky:#0EA5E9;--v4-ink:#EAF1F6;--v4-ink-mute:#7F98A9;--v4-line:rgba(255,255,255,.12);--v4-glass:linear-gradient(155deg,rgba(255,255,255,.10),rgba(255,255,255,.025));--v4-glass-solid:rgba(13,31,45,.92);--v4-radius:20px;--v4-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;container-type:inline-size;position:relative;box-sizing:border-box;width:100%;overflow:hidden;isolation:isolate;padding:20px;border-radius:24px;font-family:var(--v4-sans);color:var(--v4-ink);line-height:1.4;background:radial-gradient(135% 95% at 10% -12%,rgba(194,168,122,.16),transparent 54%),radial-gradient(105% 82% at 110% 114%,rgba(14,165,233,.15),transparent 60%),linear-gradient(158deg,#04101a 0%,#071d2c 50%,#0a2638 100%);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.v4-root *{box-sizing:border-box}
+
+.v4-root .v4-atmos{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.v4-root .v4-blob{position:absolute;border-radius:50%;filter:blur(55px);opacity:.55}
+.v4-root .v4-blob--gold{width:64cqw;height:64cqw;top:-20cqw;left:-14cqw;background:radial-gradient(circle,rgba(194,168,122,.6),rgba(194,168,122,0) 70%)}
+.v4-root .v4-blob--sky{width:70cqw;height:70cqw;right:-18cqw;bottom:-24cqw;background:radial-gradient(circle,rgba(14,165,233,.5),rgba(14,165,233,0) 70%)}
+.v4-root .v4-grain{position:absolute;inset:0;width:100%;height:100%;opacity:.06;mix-blend-mode:overlay}
+
+.v4-root .v4-head{position:relative;z-index:2;margin-bottom:18px}
+.v4-root .v4-title{position:relative;margin:0;padding-left:15px;font-size:21px;line-height:1.14;font-weight:650;letter-spacing:-.02em;color:var(--v4-ink)}
+.v4-root .v4-title::before{content:"";position:absolute;left:0;top:.14em;bottom:.14em;width:4px;border-radius:3px;background:linear-gradient(180deg,#EBD9B6,#C2A87A);box-shadow:0 0 18px rgba(194,168,122,.55)}
+
+.v4-root .v4-params{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.v4-root .v4-pill{display:inline-flex;align-items:center;gap:8px;padding:9px 14px 9px 12px;border-radius:999px;border:1px solid var(--v4-line);background:var(--v4-glass);-webkit-backdrop-filter:blur(12px) saturate(140%);backdrop-filter:blur(12px) saturate(140%);box-shadow:0 12px 26px -18px rgba(2,10,18,.85),inset 0 1px 0 rgba(255,255,255,.18);font-size:12.5px;transition:border-color .3s,transform .3s}
+.v4-root .v4-pill:hover{border-color:rgba(255,255,255,.22);transform:translateY(-1px)}
+.v4-root .v4-pill svg{width:15px;height:15px;color:var(--v4-gold);flex:none}
+.v4-root .v4-pill-k{color:var(--v4-ink-mute)}
+.v4-root .v4-pill-v{color:var(--v4-ink);font-weight:600}
+
+.v4-root .v4-grid{position:relative;z-index:2;display:grid;gap:12px;grid-template-columns:repeat(2,1fr);grid-template-areas:"price price" "area floors" "units deadline" "kremlin metro" "parking parking"}
+
+.v4-root .v4-card{position:relative;border-radius:var(--v4-radius);border:1px solid var(--v4-line);background:var(--v4-glass);-webkit-backdrop-filter:blur(14px) saturate(145%);backdrop-filter:blur(14px) saturate(145%);box-shadow:0 24px 48px -26px rgba(2,10,18,.88),0 2px 8px -5px rgba(2,10,18,.6);overflow:hidden;isolation:isolate;transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .4s,box-shadow .4s}
+.v4-root .v4-card::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.08),transparent 30%);box-shadow:inset 0 1px 0 rgba(255,255,255,.22)}
+.v4-root .v4-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.2);box-shadow:0 30px 58px -26px rgba(2,10,18,.92),0 3px 10px -5px rgba(2,10,18,.65)}
+
+.v4-root .v4-k{font-size:10.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--v4-ink-mute);line-height:1.3}
+.v4-root .v4-v{font-size:20px;font-weight:640;color:var(--v4-ink);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+
+.v4-root .v4-price{grid-area:price;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:22px;min-height:118px;border-color:rgba(194,168,122,.32);background:radial-gradient(120% 150% at 100% 0%,rgba(194,168,122,.2),transparent 52%),var(--v4-glass)}
+.v4-root .v4-price-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--v4-gold)}
+.v4-root .v4-price-val{font-size:31px;font-weight:680;line-height:1;letter-spacing:-.015em;font-variant-numeric:tabular-nums;color:#EBD9B6}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){.v4-root .v4-price-val{background:linear-gradient(180deg,#F5E7C8,#C2A87A 72%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}}
+
+.v4-root .v4-stat{display:flex;flex-direction:column;gap:10px;padding:15px 16px;min-height:92px}
+.v4-root .v4-stat .v4-v{margin-top:auto}
+
+.v4-root .v4-chip{display:flex;align-items:center;gap:12px;padding:14px 15px}
+.v4-root .v4-glyph{flex:none;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--v4-line);background:rgba(255,255,255,.05);color:var(--v4-gold)}
+.v4-root .v4-glyph svg{width:20px;height:20px}
+.v4-root .v4-ct{display:flex;flex-direction:column;gap:4px;min-width:0}
+.v4-root .v4-chip .v4-v{font-size:17px}
+.v4-root .v4-chip--metro .v4-glyph{color:var(--v4-sky);border-color:rgba(14,165,233,.4);background:rgba(14,165,233,.12)}
+
+@supports not ((-webkit-backdrop-filter:blur(2px)) or (backdrop-filter:blur(2px))){
+.v4-root .v4-card,.v4-root .v4-pill{background:var(--v4-glass-solid)}
+.v4-root .v4-price{background:linear-gradient(155deg,rgba(30,44,40,.94),rgba(13,31,45,.94))}
+}
+
+@container (min-width:700px){
+.v4-root{padding:30px;border-radius:26px}
+.v4-root .v4-head{margin-bottom:22px}
+.v4-root .v4-title{font-size:27px;padding-left:17px}
+.v4-root .v4-grid{gap:14px;grid-template-columns:repeat(4,1fr);grid-template-areas:"price price area floors" "price price units deadline" "metro metro kremlin parking"}
+.v4-root .v4-price{padding:28px;min-height:0}
+.v4-root .v4-price-val{font-size:40px}
+.v4-root .v4-v{font-size:21px}
+.v4-root .v4-chip .v4-v{font-size:18px}
+}
+
+@container (min-width:1000px){
+.v4-root{padding:42px;border-radius:30px}
+.v4-root .v4-head{margin-bottom:28px}
+.v4-root .v4-title{font-size:33px;padding-left:19px}
+.v4-root .v4-grid{gap:16px;grid-template-columns:1.55fr 1fr 1fr 1fr;grid-template-areas:"price area floors units" "price deadline metro metro" "price kremlin parking parking"}
+.v4-root .v4-price{padding:34px 32px;margin-right:-22px;z-index:3;border-color:rgba(194,168,122,.4);box-shadow:0 44px 84px -34px rgba(2,10,18,.95),0 6px 16px -8px rgba(2,10,18,.7)}
+.v4-root .v4-price-label{font-size:12px}
+.v4-root .v4-price-val{font-size:52px}
+.v4-root .v4-stat{padding:18px 20px}
+.v4-root .v4-v{font-size:23px}
+.v4-root .v4-chip{padding:16px 18px}
+.v4-root .v4-chip .v4-v{font-size:19px}
+.v4-root .v4-glyph{width:44px;height:44px}
+.v4-root .v4-glyph svg{width:22px;height:22px}
+}
+
+@media (prefers-reduced-motion:reduce){
+.v4-root .v4-card,.v4-root .v4-pill{transition:none}
+.v4-root .v4-card:hover,.v4-root .v4-pill:hover{transform:none}
+}
+
+/* ===== v5 : Operator KPI Cockpit ===== */
+.v5-root{
+  container-type: inline-size;
+  width:100%;
+  --v5-bg:#0b1620;
+  --v5-panel:#0e1c28;
+  --v5-gold:#C2A87A;
+  --v5-gold-soft:rgba(194,168,122,.16);
+  --v5-gold-line:rgba(194,168,122,.24);
+  --v5-sky:#0EA5E9;
+  --v5-sky-2:#7dd3fc;
+  --v5-sky-soft:rgba(14,165,233,.16);
+  --v5-ink:#eaf1f6;
+  --v5-muted:#93a7b6;
+  --v5-faint:#5b6f7d;
+  --v5-line:rgba(255,255,255,.07);
+  --v5-mono:ui-monospace,'SF Mono',Menlo,monospace;
+  --v5-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-family:var(--v5-sans);
+  color:var(--v5-ink);
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(14,165,233,.06), transparent 60%),
+    radial-gradient(120% 90% at 0% 100%, rgba(194,168,122,.06), transparent 55%),
+    var(--v5-bg);
+  border:1px solid var(--v5-line);
+  border-radius:16px;
+  padding:16px;
+  box-sizing:border-box;
+  -webkit-font-smoothing:antialiased;
+}
+.v5-root *{box-sizing:border-box;}
+
+.v5-root .v5-frame{position:relative;padding:8px;}
+.v5-root .v5-frame::before,
+.v5-root .v5-frame::after{
+  content:'';position:absolute;width:14px;height:14px;pointer-events:none;opacity:.75;
+}
+.v5-root .v5-frame::before{top:0;left:0;border-top:2px solid var(--v5-gold);border-left:2px solid var(--v5-gold);}
+.v5-root .v5-frame::after{bottom:0;right:0;border-bottom:2px solid var(--v5-gold);border-right:2px solid var(--v5-gold);}
+
+/* Header */
+.v5-root .v5-head{
+  display:flex;flex-direction:column;gap:16px;
+  padding:2px 2px 18px;
+  border-bottom:1px solid var(--v5-line);
+  margin-bottom:16px;
+}
+.v5-root .v5-kicker{
+  font-family:var(--v5-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--v5-gold);opacity:.9;
+}
+.v5-root .v5-title{
+  margin:8px 0 0;font-size:20px;line-height:1.16;font-weight:650;letter-spacing:-.01em;color:var(--v5-ink);
+}
+.v5-root .v5-statusbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.v5-root .v5-chip{
+  display:inline-flex;align-items:baseline;gap:8px;padding:7px 11px;
+  border:1px solid var(--v5-gold-line);border-radius:8px;
+  background:linear-gradient(180deg, rgba(194,168,122,.07), rgba(194,168,122,.02));
+}
+.v5-root .v5-chip-k{font-family:var(--v5-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--v5-muted);}
+.v5-root .v5-chip-v{font-size:13px;font-weight:600;color:var(--v5-ink);}
+.v5-root .v5-live{
+  display:inline-flex;align-items:center;gap:7px;margin-left:auto;
+  font-family:var(--v5-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--v5-faint);
+}
+.v5-root .v5-live-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--v5-sky);
+  box-shadow:0 0 0 3px var(--v5-sky-soft);
+}
+
+/* Grid */
+.v5-root .v5-grid{display:grid;grid-template-columns:1fr;gap:10px;}
+
+/* Cards */
+.v5-root .v5-card{
+  position:relative;display:flex;flex-direction:column;min-height:118px;padding:14px;
+  border:1px solid var(--v5-line);border-radius:12px;
+  background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)), var(--v5-panel);
+  overflow:hidden;
+  transition:border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+.v5-root .v5-card:hover{
+  border-color:var(--v5-gold-line);transform:translateY(-2px);
+  box-shadow:0 12px 30px -18px rgba(0,0,0,.85);
+}
+.v5-root .v5-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;}
+.v5-root .v5-label{font-family:var(--v5-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--v5-muted);}
+.v5-root .v5-idx{font-family:var(--v5-mono);font-size:10px;letter-spacing:.1em;color:var(--v5-faint);}
+
+/* Price */
+.v5-root .v5-card--price{
+  background:
+    radial-gradient(90% 130% at 0% 0%, rgba(194,168,122,.13), transparent 55%),
+    linear-gradient(180deg, rgba(194,168,122,.05), rgba(255,255,255,0)),
+    var(--v5-panel);
+  border-color:var(--v5-gold-line);justify-content:space-between;
+}
+.v5-root .v5-price{display:flex;align-items:baseline;gap:8px;margin-top:6px;}
+.v5-root .v5-price-num{font-size:34px;line-height:1;font-weight:680;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:#fff;}
+.v5-root .v5-price-cur{font-size:20px;font-weight:600;color:var(--v5-gold);}
+.v5-root .v5-price-sub{display:flex;align-items:center;gap:12px;margin-top:16px;font-family:var(--v5-mono);font-size:11px;letter-spacing:.06em;color:var(--v5-muted);white-space:nowrap;}
+.v5-root .v5-price-bar{flex:1;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--v5-gold),transparent);}
+
+/* Generic stat */
+.v5-root .v5-stat{display:flex;align-items:baseline;gap:7px;margin-top:auto;}
+.v5-root .v5-stat-pre{font-size:13px;color:var(--v5-muted);font-weight:500;}
+.v5-root .v5-stat-num{font-size:30px;font-weight:680;letter-spacing:-.01em;font-variant-numeric:tabular-nums;color:var(--v5-ink);}
+.v5-root .v5-stat-suf{font-family:var(--v5-mono);font-size:11px;color:var(--v5-faint);align-self:center;}
+.v5-root .v5-unit{
+  font-family:var(--v5-mono);font-size:11px;padding:3px 7px;border-radius:6px;
+  border:1px solid var(--v5-sky-soft);background:var(--v5-sky-soft);color:var(--v5-sky-2);align-self:center;
+}
+.v5-root .v5-spark{width:100%;height:26px;margin-top:12px;display:block;}
+.v5-root .v5-spark-line{fill:none;stroke:var(--v5-sky);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.v5-root .v5-spark-dot{fill:var(--v5-sky);}
+.v5-root .v5-bars{width:100%;height:30px;margin-top:12px;display:block;}
+.v5-root .v5-bar{fill:rgba(194,168,122,.38);}
+.v5-root .v5-bar--last{fill:var(--v5-sky);}
+
+/* Meter */
+.v5-root .v5-meter-head{display:flex;align-items:baseline;justify-content:space-between;margin-top:auto;margin-bottom:10px;gap:10px;}
+.v5-root .v5-meter-read{font-family:var(--v5-mono);font-size:15px;color:var(--v5-muted);font-variant-numeric:tabular-nums;}
+.v5-root .v5-meter-read b{font-size:22px;color:var(--v5-ink);font-weight:700;}
+.v5-root .v5-meter-pct{font-family:var(--v5-mono);font-size:12px;font-weight:600;color:var(--v5-sky);letter-spacing:.04em;}
+.v5-root .v5-meter{position:relative;height:10px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden;border:1px solid var(--v5-line);}
+.v5-root .v5-meter-fill{position:absolute;inset:0;width:100%;border-radius:99px;background:linear-gradient(90deg,var(--v5-sky),var(--v5-gold));box-shadow:0 0 14px rgba(14,165,233,.4);}
+.v5-root .v5-meter-fill::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 2px,transparent 2px 11px);}
+.v5-root .v5-meter-foot{display:flex;justify-content:space-between;gap:8px;margin-top:9px;font-family:var(--v5-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--v5-faint);}
+
+/* Deadline timeline */
+.v5-root .v5-deadline{display:flex;align-items:baseline;gap:8px;margin-top:auto;margin-bottom:18px;}
+.v5-root .v5-deadline-val{font-size:26px;font-weight:680;color:var(--v5-ink);letter-spacing:-.01em;}
+.v5-root .v5-deadline-year{font-family:var(--v5-mono);font-size:18px;font-weight:600;color:var(--v5-gold);font-variant-numeric:tabular-nums;}
+.v5-root .v5-timeline{position:relative;}
+.v5-root .v5-tl-line{position:absolute;left:12.5%;right:12.5%;top:6px;height:2px;background:var(--v5-line);}
+.v5-root .v5-tl-line::before{content:'';position:absolute;left:0;top:0;height:100%;width:0;background:var(--v5-gold);box-shadow:0 0 8px rgba(194,168,122,.5);}
+.v5-root .v5-tl-nodes{display:grid;grid-template-columns:repeat(4,1fr);position:relative;}
+.v5-root .v5-tl-node{display:flex;flex-direction:column;align-items:center;gap:9px;}
+.v5-root .v5-tl-dot{width:12px;height:12px;border-radius:50%;background:var(--v5-panel);border:2px solid var(--v5-faint);position:relative;z-index:1;}
+.v5-root .v5-tl-q{font-family:var(--v5-mono);font-size:10px;letter-spacing:.06em;color:var(--v5-faint);}
+.v5-root .v5-tl-on .v5-tl-dot{background:var(--v5-gold);border-color:var(--v5-gold);box-shadow:0 0 0 4px var(--v5-gold-soft),0 0 12px rgba(194,168,122,.55);}
+.v5-root .v5-tl-on .v5-tl-q{color:var(--v5-gold);}
+
+/* Kremlin gauge */
+.v5-root .v5-card--center{align-items:center;}
+.v5-root .v5-card--center .v5-card-top{width:100%;}
+.v5-root .v5-gauge-wrap{position:relative;width:96px;height:96px;margin:auto;}
+.v5-root .v5-gauge{width:100%;height:100%;transform:rotate(-90deg);display:block;}
+.v5-root .v5-gauge-track{fill:none;stroke:rgba(255,255,255,.08);stroke-width:6;}
+.v5-root .v5-gauge-arc{fill:none;stroke:var(--v5-gold);stroke-width:6;stroke-linecap:round;stroke-dasharray:213.6;stroke-dashoffset:72;filter:drop-shadow(0 0 4px rgba(194,168,122,.55));}
+.v5-root .v5-gauge-read{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;}
+.v5-root .v5-gauge-num{font-family:var(--v5-mono);font-size:20px;font-weight:600;color:var(--v5-ink);font-variant-numeric:tabular-nums;letter-spacing:-.02em;}
+.v5-root .v5-gauge-unit{font-family:var(--v5-mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--v5-muted);}
+
+/* Metro */
+.v5-root .v5-metro{display:flex;align-items:center;gap:14px;margin-top:auto;}
+.v5-root .v5-metro-glyph{
+  flex:none;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 30% 30%, rgba(194,168,122,.26),rgba(194,168,122,.06));
+  border:1px solid var(--v5-gold-line);
+}
+.v5-root .v5-metro-glyph svg{width:24px;height:24px;}
+.v5-root .v5-metro-glyph path{stroke:var(--v5-gold);}
+.v5-root .v5-metro-name{display:block;font-size:19px;font-weight:650;color:var(--v5-ink);letter-spacing:-.01em;}
+.v5-root .v5-metro-sub{display:block;margin-top:4px;font-family:var(--v5-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--v5-faint);}
+
+/* Parking pill */
+.v5-root .v5-pill{
+  display:inline-flex;align-items:center;gap:10px;margin-top:auto;align-self:flex-start;
+  padding:10px 14px;border-radius:10px;
+  border:1px solid rgba(14,165,233,.38);
+  background:linear-gradient(180deg,rgba(14,165,233,.15),rgba(14,165,233,.05));
+}
+.v5-root .v5-pill-check{
+  width:22px;height:22px;border-radius:50%;background:var(--v5-sky);display:flex;align-items:center;justify-content:center;flex:none;
+  box-shadow:0 0 12px rgba(14,165,233,.5);
+}
+.v5-root .v5-pill-check svg{width:14px;height:14px;}
+.v5-root .v5-pill-check path{stroke:#071520;}
+.v5-root .v5-pill-t{font-size:17px;font-weight:700;color:var(--v5-ink);}
+.v5-root .v5-pill-s{font-family:var(--v5-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--v5-sky-2);}
+
+/* ===== TABLET ===== */
+@container (min-width:700px){
+  .v5-root{padding:22px;}
+  .v5-root .v5-head{flex-direction:row;align-items:flex-end;justify-content:space-between;gap:24px;}
+  .v5-root .v5-head-main{max-width:60%;}
+  .v5-root .v5-title{font-size:23px;}
+  .v5-root .v5-statusbar{justify-content:flex-end;}
+  .v5-root .v5-live{margin-left:0;flex-basis:100%;justify-content:flex-end;}
+  .v5-root .v5-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+  .v5-root .v5-c-price{grid-column:span 2;}
+  .v5-root .v5-c-units{grid-column:span 2;}
+  .v5-root .v5-c-deadline{grid-column:span 2;}
+  .v5-root .v5-c-parking{grid-column:span 2;}
+  .v5-root .v5-price-num{font-size:42px;}
+}
+
+/* ===== DESKTOP ===== */
+@container (min-width:1000px){
+  .v5-root{padding:26px;}
+  .v5-root .v5-title{font-size:25px;}
+  .v5-root .v5-grid{grid-template-columns:repeat(4,1fr);gap:12px;}
+  .v5-root .v5-card{min-height:140px;}
+  .v5-root .v5-c-price{grid-column:span 2;}
+  .v5-root .v5-c-area{grid-column:span 1;}
+  .v5-root .v5-c-floors{grid-column:span 1;}
+  .v5-root .v5-c-units{grid-column:span 2;}
+  .v5-root .v5-c-deadline{grid-column:span 2;}
+  .v5-root .v5-c-kremlin{grid-column:span 1;}
+  .v5-root .v5-c-metro{grid-column:span 2;}
+  .v5-root .v5-c-parking{grid-column:span 1;}
+  .v5-root .v5-price-num{font-size:46px;}
+  .v5-root .v5-card--price{min-height:150px;}
+}
+</style>
+<div class="page"><div class="wrap"><header class="masthead"><span class="eyebrow">RWGroup · Карточка ЖК · Редизайн</span><h1 class="h1">Блок <em>«Условия покупки и&nbsp;параметры дома»</em></h1><p class="lede">Пять самостоятельных дизайн-направлений одного блока на реальных данных ЖК. Каждый вариант показан на трёх разрешениях и адаптируется <b>по-настоящему</b> — через CSS container queries, а не скриншотами: layout меняется от ширины фрейма. Тёмные варианты используют палитру лендинга (surface #071520, gold #C2A87A); вариант 03 намеренно сделан светлым, чтобы показать диапазон.</p><div class="legend"><span class="pill"><span class="dot" style="background:var(--gold)"></span> 5 направлений</span><span class="pill">Разрешения: <b>375</b> / <b>768</b> / <b>1200</b></span><span class="pill">Данные реальные из карточки ЖК</span><span class="pill">Тема страницы: <b>light + dark</b></span></div></header><section class="variant"><div class="vhead"><div class="vindex">01</div><div class="vmeta"><h2 class="vname">Тёмное золото</h2><div class="vtag">Тёмный люкс · нативный сайту</div><p class="vrat">Тёмно-золотой люксовый блок в палитре сайта: крупный золотой акцент на цене, редакторский список характеристик с золотыми хайрлайнами и обводные пилюли метро/паркинга/расстояния — нативно ложится на тёмные лендинги ЖК.</p></div><div class="vswatch" aria-hidden="true"><span style="background:#071520"></span><span style="background:#C2A87A"></span><span style="background:#EAF1F5"></span></div></div><div class="stage"><div class="rail"><div class="device"><div class="dlabel">Mobile <span class="dw">375px</span><span class="bar"></span></div><div class="viewport" style="width:375px"><div class="v1-root">
+  <span class="v1-glow" aria-hidden="true"></span>
+
+  <header class="v1-masthead">
+    <h2 class="v1-title">Условия покупки и параметры дома</h2>
+    <div class="v1-meta">
+      <div class="v1-meta-item">
+        <span class="v1-meta-label">Тип дома</span>
+        <span class="v1-meta-value">Монолитный</span>
+      </div>
+      <div class="v1-meta-item">
+        <span class="v1-meta-label">Минимальная очередь</span>
+        <span class="v1-meta-value">1</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="v1-body">
+    <div class="v1-hero">
+      <span class="v1-hero-label">Цена от</span>
+      <span class="v1-hero-price"><span class="v1-num">17 722 630</span><span class="v1-cur">₽</span></span>
+    </div>
+
+    <dl class="v1-specs">
+      <div class="v1-spec">
+        <dt class="v1-spec-label">Площадь от</dt>
+        <dd class="v1-spec-value">от 25 м²</dd>
+      </div>
+      <div class="v1-spec">
+        <dt class="v1-spec-label">Этажность</dt>
+        <dd class="v1-spec-value">35</dd>
+      </div>
+      <div class="v1-spec">
+        <dt class="v1-spec-label">Квартир в продаже / всего</dt>
+        <dd class="v1-spec-value">371 / 371</dd>
+      </div>
+      <div class="v1-spec">
+        <dt class="v1-spec-label">Срок сдачи</dt>
+        <dd class="v1-spec-value">I кв. 2027</dd>
+      </div>
+    </dl>
+
+    <ul class="v1-chips">
+      <li class="v1-chip">
+        <span class="v1-chip-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 18V7l7 7 7-7v11"/></svg></span>
+        <span class="v1-chip-text">
+          <span class="v1-chip-label">Ближайшее метро</span>
+          <span class="v1-chip-value">Балтийская</span>
+        </span>
+      </li>
+      <li class="v1-chip">
+        <span class="v1-chip-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 18V6h4a3 3 0 0 1 0 6H8"/></svg></span>
+        <span class="v1-chip-text">
+          <span class="v1-chip-label">Подземный паркинг</span>
+          <span class="v1-chip-value">Да</span>
+        </span>
+      </li>
+      <li class="v1-chip">
+        <span class="v1-chip-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21c4.4-4.2 7-7.5 7-11a7 7 0 1 0-14 0c0 3.5 2.6 6.8 7 11z"/><circle cx="12" cy="10" r="2.3"/></svg></span>
+        <span class="v1-chip-text">
+          <span class="v1-chip-label">До Кремля</span>
+          <span class="v1-chip-value">11,7 км</span>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div></div></div><div class="device"><div class="dlabel">Tablet <span class="dw">768px</span><span class="bar"></span></div><div class="viewport" style="width:768px"><div class="v1-root">
+  <span class="v1-glow" aria-hidden="true"></span>
+
+  <header class="v1-masthead">
+    <h2 class="v1-title">Условия покупки и параметры дома</h2>
+    <div class="v1-meta">
+      <div class="v1-meta-item">
+        <span class="v1-meta-label">Тип дома</span>
+        <span class="v1-meta-value">Монолитный</span>
+      </div>
+      <div class="v1-meta-item">
+        <span class="v1-meta-label">Минимальная очередь</span>
+        <span class="v1-meta-value">1</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="v1-body">
+    <div class="v1-hero">
+      <span class="v1-hero-label">Цена от</span>
+      <span class="v1-hero-price"><span class="v1-num">17 722 630</span><span class="v1-cur">₽</span></span>
+    </div>
+
+    <dl class="v1-specs">
+      <div class="v1-spec">
+        <dt class="v1-spec-label">Площадь от</dt>
+        <dd class="v1-spec-value">от 25 м²</dd>
+      </div>
+      <div class="v1-spec">
+        <dt class="v1-spec-label">Этажность</dt>
+        <dd class="v1-spec-value">35</dd>
+      </div>
+      <div class="v1-spec">
+        <dt class="v1-spec-label">Квартир в продаже / всего</dt>
+        <dd class="v1-spec-value">371 / 371</dd>
+      </div>
+      <div class="v1-spec">
+        <dt class="v1-spec-label">Срок сдачи</dt>
+        <dd class="v1-spec-value">I кв. 2027</dd>
+      </div>
+    </dl>
+
+    <ul class="v1-chips">
+      <li class="v1-chip">
+        <span class="v1-chip-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 18V7l7 7 7-7v11"/></svg></span>
+        <span class="v1-chip-text">
+          <span class="v1-chip-label">Ближайшее метро</span>
+          <span class="v1-chip-value">Балтийская</span>
+        </span>
+      </li>
+      <li class="v1-chip">
+        <span class="v1-chip-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 18V6h4a3 3 0 0 1 0 6H8"/></svg></span>
+        <span class="v1-chip-text">
+          <span class="v1-chip-label">Подземный паркинг</span>
+          <span class="v1-chip-value">Да</span>
+        </span>
+      </li>
+      <li class="v1-chip">
+        <span class="v1-chip-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21c4.4-4.2 7-7.5 7-11a7 7 0 1 0-14 0c0 3.5 2.6 6.8 7 11z"/><circle cx="12" cy="10" r="2.3"/></svg></span>
+        <span class="v1-chip-text">
+          <span class="v1-chip-label">До Кремля</span>
+          <span class="v1-chip-value">11,7 км</span>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div></div></div></div><div class="rail desk"><div class="device"><div class="dlabel">Desktop <span class="dw">1200px</span><span class="bar"></span></div><div class="viewport" style="width:1200px"><div class="v1-root">
+  <span class="v1-glow" aria-hidden="true"></span>
+
+  <header class="v1-masthead">
+    <h2 class="v1-title">Условия покупки и параметры дома</h2>
+    <div class="v1-meta">
+      <div class="v1-meta-item">
+        <span class="v1-meta-label">Тип дома</span>
+        <span class="v1-meta-value">Монолитный</span>
+      </div>
+      <div class="v1-meta-item">
+        <span class="v1-meta-label">Минимальная очередь</span>
+        <span class="v1-meta-value">1</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="v1-body">
+    <div class="v1-hero">
+      <span class="v1-hero-label">Цена от</span>
+      <span class="v1-hero-price"><span class="v1-num">17 722 630</span><span class="v1-cur">₽</span></span>
+    </div>
+
+    <dl class="v1-specs">
+      <div class="v1-spec">
+        <dt class="v1-spec-label">Площадь от</dt>
+        <dd class="v1-spec-value">от 25 м²</dd>
+      </div>
+      <div class="v1-spec">
+        <dt class="v1-spec-label">Этажность</dt>
+        <dd class="v1-spec-value">35</dd>
+      </div>
+      <div class="v1-spec">
+        <dt class="v1-spec-label">Квартир в продаже / всего</dt>
+        <dd class="v1-spec-value">371 / 371</dd>
+      </div>
+      <div class="v1-spec">
+        <dt class="v1-spec-label">Срок сдачи</dt>
+        <dd class="v1-spec-value">I кв. 2027</dd>
+      </div>
+    </dl>
+
+    <ul class="v1-chips">
+      <li class="v1-chip">
+        <span class="v1-chip-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 18V7l7 7 7-7v11"/></svg></span>
+        <span class="v1-chip-text">
+          <span class="v1-chip-label">Ближайшее метро</span>
+          <span class="v1-chip-value">Балтийская</span>
+        </span>
+      </li>
+      <li class="v1-chip">
+        <span class="v1-chip-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 18V6h4a3 3 0 0 1 0 6H8"/></svg></span>
+        <span class="v1-chip-text">
+          <span class="v1-chip-label">Подземный паркинг</span>
+          <span class="v1-chip-value">Да</span>
+        </span>
+      </li>
+      <li class="v1-chip">
+        <span class="v1-chip-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21c4.4-4.2 7-7.5 7-11a7 7 0 1 0-14 0c0 3.5 2.6 6.8 7 11z"/><circle cx="12" cy="10" r="2.3"/></svg></span>
+        <span class="v1-chip-text">
+          <span class="v1-chip-label">До Кремля</span>
+          <span class="v1-chip-value">11,7 км</span>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div></div></div></div></div></section><section class="variant"><div class="vhead"><div class="vindex">02</div><div class="vmeta"><h2 class="vname">Асимметричная бенто-сетка</h2><div class="vtag">Бенто · асимметрия</div><p class="vrat">Тёмная бенто-сетка с разным весом плиток и золотыми акцентами: «Цена от» — крупная фичер-плитка 2×2, метро и паркинг с инлайновыми SVG-глифами, а плитка продаж несёт тонкий прогресс-бар на 100%.</p></div><div class="vswatch" aria-hidden="true"><span style="background:#071520"></span><span style="background:#0F2432"></span><span style="background:#C2A87A"></span></div></div><div class="stage"><div class="rail"><div class="device"><div class="dlabel">Mobile <span class="dw">375px</span><span class="bar"></span></div><div class="viewport" style="width:375px"><div class="v2-root">
+  <header class="v2-band">
+    <h2 class="v2-title">Условия покупки и параметры дома</h2>
+    <div class="v2-chips">
+      <span class="v2-chip"><span class="v2-chip-k">Тип дома</span><span class="v2-chip-v">Монолитный</span></span>
+      <span class="v2-chip"><span class="v2-chip-k">Минимальная очередь</span><span class="v2-chip-v">1</span></span>
+    </div>
+  </header>
+
+  <div class="v2-bento">
+    <!-- ЦЕНА ОТ — feature -->
+    <article class="v2-tile v2-price">
+      <svg class="v2-price-arc" viewBox="0 0 132 132" fill="none" aria-hidden="true">
+        <circle cx="132" cy="0" r="86" stroke="rgba(194,168,122,.13)" stroke-width="1"/>
+        <circle cx="132" cy="0" r="60" stroke="rgba(194,168,122,.09)" stroke-width="1"/>
+        <circle cx="132" cy="0" r="34" stroke="rgba(194,168,122,.06)" stroke-width="1"/>
+      </svg>
+      <div class="v2-price-top">
+        <span class="v2-label">ЦЕНА ОТ</span>
+        <span class="v2-accent"></span>
+      </div>
+      <div class="v2-price-row">
+        <span class="v2-price-num">17 722 630</span>
+        <span class="v2-price-cur">₽</span>
+      </div>
+    </article>
+
+    <!-- ПЛОЩАДЬ ОТ -->
+    <article class="v2-tile v2-area">
+      <span class="v2-label">ПЛОЩАДЬ ОТ</span>
+      <div class="v2-val"><span class="v2-pre">от</span><span class="v2-big">25</span><span class="v2-unit">м²</span></div>
+    </article>
+
+    <!-- ЭТАЖНОСТЬ -->
+    <article class="v2-tile v2-floors">
+      <span class="v2-label">ЭТАЖНОСТЬ</span>
+      <div class="v2-val"><span class="v2-big">35</span></div>
+    </article>
+
+    <!-- КВАРТИР В ПРОДАЖЕ / ВСЕГО -->
+    <article class="v2-tile v2-sales">
+      <span class="v2-label">КВАРТИР В ПРОДАЖЕ / ВСЕГО</span>
+      <div class="v2-sales-head">
+        <span class="v2-sales-val">371 <span class="v2-sep">/</span> 371</span>
+        <span class="v2-sales-pct">100%</span>
+      </div>
+      <div class="v2-bar"><div class="v2-bar-fill"></div></div>
+    </article>
+
+    <!-- БЛИЖАЙШЕЕ МЕТРО -->
+    <article class="v2-tile v2-metro">
+      <span class="v2-label">БЛИЖАЙШЕЕ МЕТРО</span>
+      <div class="v2-metro-body">
+        <svg class="v2-mglyph" viewBox="0 0 30 26" fill="none" aria-hidden="true">
+          <path d="M4 21 V6 L15 17 L26 6 V21" stroke="#C2A87A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="v2-metro-val">Балтийская</span>
+      </div>
+    </article>
+
+    <!-- СРОК СДАЧИ -->
+    <article class="v2-tile v2-time">
+      <span class="v2-label">СРОК СДАЧИ</span>
+      <span class="v2-time-val">I кв. 2027</span>
+      <svg class="v2-timeline" viewBox="0 0 64 10" fill="none" aria-hidden="true">
+        <line x1="3" y1="5" x2="61" y2="5" stroke="rgba(194,168,122,.32)" stroke-width="1.4" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
+        <circle cx="46" cy="5" r="6" fill="none" stroke="rgba(194,168,122,.35)" stroke-width="1.2"/>
+        <circle cx="46" cy="5" r="3.2" fill="#C2A87A"/>
+      </svg>
+    </article>
+
+    <!-- ДО КРЕМЛЯ -->
+    <article class="v2-tile v2-kreml">
+      <span class="v2-label">ДО КРЕМЛЯ</span>
+      <div class="v2-kreml-body">
+        <svg class="v2-ring" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+          <circle cx="22" cy="22" r="18" stroke="rgba(194,168,122,.18)" stroke-width="1.3"/>
+          <circle cx="22" cy="22" r="11" stroke="rgba(194,168,122,.34)" stroke-width="1.3"/>
+          <path d="M22 22 L40 22" stroke="rgba(194,168,122,.4)" stroke-width="1.1" stroke-dasharray="1.5 3"/>
+          <circle cx="22" cy="22" r="3.2" fill="#C2A87A"/>
+          <circle cx="40" cy="22" r="2.4" fill="#F4F1EA"/>
+        </svg>
+        <div class="v2-val"><span class="v2-big">11,7</span><span class="v2-unit">км</span></div>
+      </div>
+    </article>
+
+    <!-- ПОДЗЕМНЫЙ ПАРКИНГ -->
+    <article class="v2-tile v2-park">
+      <span class="v2-label">ПОДЗЕМНЫЙ ПАРКИНГ</span>
+      <div class="v2-park-body">
+        <svg class="v2-check" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="11" stroke="rgba(194,168,122,.32)" stroke-width="1.3"/>
+          <path d="M6.5 12.5 L10.5 16.5 L17.5 8" stroke="#C2A87A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="v2-park-val">Да</span>
+      </div>
+    </article>
+  </div>
+</div></div></div><div class="device"><div class="dlabel">Tablet <span class="dw">768px</span><span class="bar"></span></div><div class="viewport" style="width:768px"><div class="v2-root">
+  <header class="v2-band">
+    <h2 class="v2-title">Условия покупки и параметры дома</h2>
+    <div class="v2-chips">
+      <span class="v2-chip"><span class="v2-chip-k">Тип дома</span><span class="v2-chip-v">Монолитный</span></span>
+      <span class="v2-chip"><span class="v2-chip-k">Минимальная очередь</span><span class="v2-chip-v">1</span></span>
+    </div>
+  </header>
+
+  <div class="v2-bento">
+    <!-- ЦЕНА ОТ — feature -->
+    <article class="v2-tile v2-price">
+      <svg class="v2-price-arc" viewBox="0 0 132 132" fill="none" aria-hidden="true">
+        <circle cx="132" cy="0" r="86" stroke="rgba(194,168,122,.13)" stroke-width="1"/>
+        <circle cx="132" cy="0" r="60" stroke="rgba(194,168,122,.09)" stroke-width="1"/>
+        <circle cx="132" cy="0" r="34" stroke="rgba(194,168,122,.06)" stroke-width="1"/>
+      </svg>
+      <div class="v2-price-top">
+        <span class="v2-label">ЦЕНА ОТ</span>
+        <span class="v2-accent"></span>
+      </div>
+      <div class="v2-price-row">
+        <span class="v2-price-num">17 722 630</span>
+        <span class="v2-price-cur">₽</span>
+      </div>
+    </article>
+
+    <!-- ПЛОЩАДЬ ОТ -->
+    <article class="v2-tile v2-area">
+      <span class="v2-label">ПЛОЩАДЬ ОТ</span>
+      <div class="v2-val"><span class="v2-pre">от</span><span class="v2-big">25</span><span class="v2-unit">м²</span></div>
+    </article>
+
+    <!-- ЭТАЖНОСТЬ -->
+    <article class="v2-tile v2-floors">
+      <span class="v2-label">ЭТАЖНОСТЬ</span>
+      <div class="v2-val"><span class="v2-big">35</span></div>
+    </article>
+
+    <!-- КВАРТИР В ПРОДАЖЕ / ВСЕГО -->
+    <article class="v2-tile v2-sales">
+      <span class="v2-label">КВАРТИР В ПРОДАЖЕ / ВСЕГО</span>
+      <div class="v2-sales-head">
+        <span class="v2-sales-val">371 <span class="v2-sep">/</span> 371</span>
+        <span class="v2-sales-pct">100%</span>
+      </div>
+      <div class="v2-bar"><div class="v2-bar-fill"></div></div>
+    </article>
+
+    <!-- БЛИЖАЙШЕЕ МЕТРО -->
+    <article class="v2-tile v2-metro">
+      <span class="v2-label">БЛИЖАЙШЕЕ МЕТРО</span>
+      <div class="v2-metro-body">
+        <svg class="v2-mglyph" viewBox="0 0 30 26" fill="none" aria-hidden="true">
+          <path d="M4 21 V6 L15 17 L26 6 V21" stroke="#C2A87A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="v2-metro-val">Балтийская</span>
+      </div>
+    </article>
+
+    <!-- СРОК СДАЧИ -->
+    <article class="v2-tile v2-time">
+      <span class="v2-label">СРОК СДАЧИ</span>
+      <span class="v2-time-val">I кв. 2027</span>
+      <svg class="v2-timeline" viewBox="0 0 64 10" fill="none" aria-hidden="true">
+        <line x1="3" y1="5" x2="61" y2="5" stroke="rgba(194,168,122,.32)" stroke-width="1.4" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
+        <circle cx="46" cy="5" r="6" fill="none" stroke="rgba(194,168,122,.35)" stroke-width="1.2"/>
+        <circle cx="46" cy="5" r="3.2" fill="#C2A87A"/>
+      </svg>
+    </article>
+
+    <!-- ДО КРЕМЛЯ -->
+    <article class="v2-tile v2-kreml">
+      <span class="v2-label">ДО КРЕМЛЯ</span>
+      <div class="v2-kreml-body">
+        <svg class="v2-ring" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+          <circle cx="22" cy="22" r="18" stroke="rgba(194,168,122,.18)" stroke-width="1.3"/>
+          <circle cx="22" cy="22" r="11" stroke="rgba(194,168,122,.34)" stroke-width="1.3"/>
+          <path d="M22 22 L40 22" stroke="rgba(194,168,122,.4)" stroke-width="1.1" stroke-dasharray="1.5 3"/>
+          <circle cx="22" cy="22" r="3.2" fill="#C2A87A"/>
+          <circle cx="40" cy="22" r="2.4" fill="#F4F1EA"/>
+        </svg>
+        <div class="v2-val"><span class="v2-big">11,7</span><span class="v2-unit">км</span></div>
+      </div>
+    </article>
+
+    <!-- ПОДЗЕМНЫЙ ПАРКИНГ -->
+    <article class="v2-tile v2-park">
+      <span class="v2-label">ПОДЗЕМНЫЙ ПАРКИНГ</span>
+      <div class="v2-park-body">
+        <svg class="v2-check" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="11" stroke="rgba(194,168,122,.32)" stroke-width="1.3"/>
+          <path d="M6.5 12.5 L10.5 16.5 L17.5 8" stroke="#C2A87A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="v2-park-val">Да</span>
+      </div>
+    </article>
+  </div>
+</div></div></div></div><div class="rail desk"><div class="device"><div class="dlabel">Desktop <span class="dw">1200px</span><span class="bar"></span></div><div class="viewport" style="width:1200px"><div class="v2-root">
+  <header class="v2-band">
+    <h2 class="v2-title">Условия покупки и параметры дома</h2>
+    <div class="v2-chips">
+      <span class="v2-chip"><span class="v2-chip-k">Тип дома</span><span class="v2-chip-v">Монолитный</span></span>
+      <span class="v2-chip"><span class="v2-chip-k">Минимальная очередь</span><span class="v2-chip-v">1</span></span>
+    </div>
+  </header>
+
+  <div class="v2-bento">
+    <!-- ЦЕНА ОТ — feature -->
+    <article class="v2-tile v2-price">
+      <svg class="v2-price-arc" viewBox="0 0 132 132" fill="none" aria-hidden="true">
+        <circle cx="132" cy="0" r="86" stroke="rgba(194,168,122,.13)" stroke-width="1"/>
+        <circle cx="132" cy="0" r="60" stroke="rgba(194,168,122,.09)" stroke-width="1"/>
+        <circle cx="132" cy="0" r="34" stroke="rgba(194,168,122,.06)" stroke-width="1"/>
+      </svg>
+      <div class="v2-price-top">
+        <span class="v2-label">ЦЕНА ОТ</span>
+        <span class="v2-accent"></span>
+      </div>
+      <div class="v2-price-row">
+        <span class="v2-price-num">17 722 630</span>
+        <span class="v2-price-cur">₽</span>
+      </div>
+    </article>
+
+    <!-- ПЛОЩАДЬ ОТ -->
+    <article class="v2-tile v2-area">
+      <span class="v2-label">ПЛОЩАДЬ ОТ</span>
+      <div class="v2-val"><span class="v2-pre">от</span><span class="v2-big">25</span><span class="v2-unit">м²</span></div>
+    </article>
+
+    <!-- ЭТАЖНОСТЬ -->
+    <article class="v2-tile v2-floors">
+      <span class="v2-label">ЭТАЖНОСТЬ</span>
+      <div class="v2-val"><span class="v2-big">35</span></div>
+    </article>
+
+    <!-- КВАРТИР В ПРОДАЖЕ / ВСЕГО -->
+    <article class="v2-tile v2-sales">
+      <span class="v2-label">КВАРТИР В ПРОДАЖЕ / ВСЕГО</span>
+      <div class="v2-sales-head">
+        <span class="v2-sales-val">371 <span class="v2-sep">/</span> 371</span>
+        <span class="v2-sales-pct">100%</span>
+      </div>
+      <div class="v2-bar"><div class="v2-bar-fill"></div></div>
+    </article>
+
+    <!-- БЛИЖАЙШЕЕ МЕТРО -->
+    <article class="v2-tile v2-metro">
+      <span class="v2-label">БЛИЖАЙШЕЕ МЕТРО</span>
+      <div class="v2-metro-body">
+        <svg class="v2-mglyph" viewBox="0 0 30 26" fill="none" aria-hidden="true">
+          <path d="M4 21 V6 L15 17 L26 6 V21" stroke="#C2A87A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="v2-metro-val">Балтийская</span>
+      </div>
+    </article>
+
+    <!-- СРОК СДАЧИ -->
+    <article class="v2-tile v2-time">
+      <span class="v2-label">СРОК СДАЧИ</span>
+      <span class="v2-time-val">I кв. 2027</span>
+      <svg class="v2-timeline" viewBox="0 0 64 10" fill="none" aria-hidden="true">
+        <line x1="3" y1="5" x2="61" y2="5" stroke="rgba(194,168,122,.32)" stroke-width="1.4" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
+        <circle cx="46" cy="5" r="6" fill="none" stroke="rgba(194,168,122,.35)" stroke-width="1.2"/>
+        <circle cx="46" cy="5" r="3.2" fill="#C2A87A"/>
+      </svg>
+    </article>
+
+    <!-- ДО КРЕМЛЯ -->
+    <article class="v2-tile v2-kreml">
+      <span class="v2-label">ДО КРЕМЛЯ</span>
+      <div class="v2-kreml-body">
+        <svg class="v2-ring" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+          <circle cx="22" cy="22" r="18" stroke="rgba(194,168,122,.18)" stroke-width="1.3"/>
+          <circle cx="22" cy="22" r="11" stroke="rgba(194,168,122,.34)" stroke-width="1.3"/>
+          <path d="M22 22 L40 22" stroke="rgba(194,168,122,.4)" stroke-width="1.1" stroke-dasharray="1.5 3"/>
+          <circle cx="22" cy="22" r="3.2" fill="#C2A87A"/>
+          <circle cx="40" cy="22" r="2.4" fill="#F4F1EA"/>
+        </svg>
+        <div class="v2-val"><span class="v2-big">11,7</span><span class="v2-unit">км</span></div>
+      </div>
+    </article>
+
+    <!-- ПОДЗЕМНЫЙ ПАРКИНГ -->
+    <article class="v2-tile v2-park">
+      <span class="v2-label">ПОДЗЕМНЫЙ ПАРКИНГ</span>
+      <div class="v2-park-body">
+        <svg class="v2-check" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="11" stroke="rgba(194,168,122,.32)" stroke-width="1.3"/>
+          <path d="M6.5 12.5 L10.5 16.5 L17.5 8" stroke="#C2A87A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="v2-park-val">Да</span>
+      </div>
+    </article>
+  </div>
+</div></div></div></div></div></section><section class="variant"><div class="vhead"><div class="vindex">03</div><div class="vmeta"><h2 class="vname">Швейцарский типографский паспорт</h2><div class="vtag">Швейцарский редактор · светлый</div><p class="vrat">Редакционный печатный спец-лист: бумажный фон, засечный Georgia в заголовке и цене-леде, нумерованный индекс 01–08, тонкие волосяные линии, единственный золотой акцент и сетка спецификаций с вертикальными разделителями — от стопки на мобиле до трёх колонок на десктопе.</p></div><div class="vswatch" aria-hidden="true"><span style="background:#F6F3EC"></span><span style="background:#111418"></span><span style="background:#B08D57"></span></div></div><div class="stage"><div class="rail"><div class="device"><div class="dlabel">Mobile <span class="dw">375px</span><span class="bar"></span></div><div class="viewport" style="width:375px"><div class="v3-root">
+  <svg class="v3-crop v3-crop--tr" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1v18M1 10h18" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+  <svg class="v3-crop v3-crop--bl" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1v18M1 10h18" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+  <div class="v3-sheet">
+    <header class="v3-masthead">
+      <div class="v3-eyebrow">
+        <span class="v3-eyebrow-range">01 — 08</span>
+        <span class="v3-eyebrow-line"></span>
+      </div>
+      <h2 class="v3-title">Условия покупки и параметры дома</h2>
+      <div class="v3-rule"><span class="v3-rule-gold"></span></div>
+      <p class="v3-caption">
+        <span class="v3-cap"><span class="v3-cap-k">Тип дома</span><span class="v3-cap-v">Монолитный</span></span>
+        <span class="v3-cap"><span class="v3-cap-k">Минимальная очередь</span><span class="v3-cap-v">1</span></span>
+      </p>
+    </header>
+
+    <div class="v3-lede">
+      <div class="v3-lede-meta">
+        <span class="v3-index v3-index--lede">01</span>
+        <span class="v3-label">ЦЕНА ОТ</span>
+      </div>
+      <p class="v3-lede-price"><span class="v3-lede-num">17 722 630</span><span class="v3-lede-cur">₽</span></p>
+    </div>
+
+    <dl class="v3-specs">
+      <div class="v3-spec">
+        <dt class="v3-spec-top"><span class="v3-index">02</span><span class="v3-label">ПЛОЩАДЬ ОТ</span></dt>
+        <dd class="v3-value"><span class="v3-val-pre">от</span>25<span class="v3-unit">м²</span></dd>
+      </div>
+      <div class="v3-spec">
+        <dt class="v3-spec-top"><span class="v3-index">03</span><span class="v3-label">ЭТАЖНОСТЬ</span></dt>
+        <dd class="v3-value">35</dd>
+      </div>
+      <div class="v3-spec">
+        <dt class="v3-spec-top"><span class="v3-index">04</span><span class="v3-label">КВАРТИР В ПРОДАЖЕ / ВСЕГО</span></dt>
+        <dd class="v3-value">371<span class="v3-val-sep">/</span>371</dd>
+      </div>
+      <div class="v3-spec">
+        <dt class="v3-spec-top"><span class="v3-index">05</span><span class="v3-label">СРОК СДАЧИ</span></dt>
+        <dd class="v3-value">I кв. 2027</dd>
+      </div>
+      <div class="v3-spec">
+        <dt class="v3-spec-top"><span class="v3-index">06</span><span class="v3-label">ДО КРЕМЛЯ</span></dt>
+        <dd class="v3-value">11,7<span class="v3-unit">км</span></dd>
+      </div>
+      <div class="v3-spec v3-spec--tag">
+        <dt class="v3-spec-top"><span class="v3-index">07</span><span class="v3-label">БЛИЖАЙШЕЕ МЕТРО</span></dt>
+        <dd class="v3-value"><span class="v3-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9" r="2.4" fill="currentColor"/></svg>Балтийская</span></dd>
+      </div>
+      <div class="v3-spec v3-spec--tag">
+        <dt class="v3-spec-top"><span class="v3-index">08</span><span class="v3-label">ПОДЗЕМНЫЙ ПАРКИНГ</span></dt>
+        <dd class="v3-value"><span class="v3-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5 11-12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Да</span></dd>
+      </div>
+    </dl>
+  </div>
+</div></div></div><div class="device"><div class="dlabel">Tablet <span class="dw">768px</span><span class="bar"></span></div><div class="viewport" style="width:768px"><div class="v3-root">
+  <svg class="v3-crop v3-crop--tr" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1v18M1 10h18" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+  <svg class="v3-crop v3-crop--bl" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1v18M1 10h18" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+  <div class="v3-sheet">
+    <header class="v3-masthead">
+      <div class="v3-eyebrow">
+        <span class="v3-eyebrow-range">01 — 08</span>
+        <span class="v3-eyebrow-line"></span>
+      </div>
+      <h2 class="v3-title">Условия покупки и параметры дома</h2>
+      <div class="v3-rule"><span class="v3-rule-gold"></span></div>
+      <p class="v3-caption">
+        <span class="v3-cap"><span class="v3-cap-k">Тип дома</span><span class="v3-cap-v">Монолитный</span></span>
+        <span class="v3-cap"><span class="v3-cap-k">Минимальная очередь</span><span class="v3-cap-v">1</span></span>
+      </p>
+    </header>
+
+    <div class="v3-lede">
+      <div class="v3-lede-meta">
+        <span class="v3-index v3-index--lede">01</span>
+        <span class="v3-label">ЦЕНА ОТ</span>
+      </div>
+      <p class="v3-lede-price"><span class="v3-lede-num">17 722 630</span><span class="v3-lede-cur">₽</span></p>
+    </div>
+
+    <dl class="v3-specs">
+      <div class="v3-spec">
+        <dt class="v3-spec-top"><span class="v3-index">02</span><span class="v3-label">ПЛОЩАДЬ ОТ</span></dt>
+        <dd class="v3-value"><span class="v3-val-pre">от</span>25<span class="v3-unit">м²</span></dd>
+      </div>
+      <div class="v3-spec">
+        <dt class="v3-spec-top"><span class="v3-index">03</span><span class="v3-label">ЭТАЖНОСТЬ</span></dt>
+        <dd class="v3-value">35</dd>
+      </div>
+      <div class="v3-spec">
+        <dt class="v3-spec-top"><span class="v3-index">04</span><span class="v3-label">КВАРТИР В ПРОДАЖЕ / ВСЕГО</span></dt>
+        <dd class="v3-value">371<span class="v3-val-sep">/</span>371</dd>
+      </div>
+      <div class="v3-spec">
+        <dt class="v3-spec-top"><span class="v3-index">05</span><span class="v3-label">СРОК СДАЧИ</span></dt>
+        <dd class="v3-value">I кв. 2027</dd>
+      </div>
+      <div class="v3-spec">
+        <dt class="v3-spec-top"><span class="v3-index">06</span><span class="v3-label">ДО КРЕМЛЯ</span></dt>
+        <dd class="v3-value">11,7<span class="v3-unit">км</span></dd>
+      </div>
+      <div class="v3-spec v3-spec--tag">
+        <dt class="v3-spec-top"><span class="v3-index">07</span><span class="v3-label">БЛИЖАЙШЕЕ МЕТРО</span></dt>
+        <dd class="v3-value"><span class="v3-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9" r="2.4" fill="currentColor"/></svg>Балтийская</span></dd>
+      </div>
+      <div class="v3-spec v3-spec--tag">
+        <dt class="v3-spec-top"><span class="v3-index">08</span><span class="v3-label">ПОДЗЕМНЫЙ ПАРКИНГ</span></dt>
+        <dd class="v3-value"><span class="v3-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5 11-12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Да</span></dd>
+      </div>
+    </dl>
+  </div>
+</div></div></div></div><div class="rail desk"><div class="device"><div class="dlabel">Desktop <span class="dw">1200px</span><span class="bar"></span></div><div class="viewport" style="width:1200px"><div class="v3-root">
+  <svg class="v3-crop v3-crop--tr" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1v18M1 10h18" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+  <svg class="v3-crop v3-crop--bl" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1v18M1 10h18" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+  <div class="v3-sheet">
+    <header class="v3-masthead">
+      <div class="v3-eyebrow">
+        <span class="v3-eyebrow-range">01 — 08</span>
+        <span class="v3-eyebrow-line"></span>
+      </div>
+      <h2 class="v3-title">Условия покупки и параметры дома</h2>
+      <div class="v3-rule"><span class="v3-rule-gold"></span></div>
+      <p class="v3-caption">
+        <span class="v3-cap"><span class="v3-cap-k">Тип дома</span><span class="v3-cap-v">Монолитный</span></span>
+        <span class="v3-cap"><span class="v3-cap-k">Минимальная очередь</span><span class="v3-cap-v">1</span></span>
+      </p>
+    </header>
+
+    <div class="v3-lede">
+      <div class="v3-lede-meta">
+        <span class="v3-index v3-index--lede">01</span>
+        <span class="v3-label">ЦЕНА ОТ</span>
+      </div>
+      <p class="v3-lede-price"><span class="v3-lede-num">17 722 630</span><span class="v3-lede-cur">₽</span></p>
+    </div>
+
+    <dl class="v3-specs">
+      <div class="v3-spec">
+        <dt class="v3-spec-top"><span class="v3-index">02</span><span class="v3-label">ПЛОЩАДЬ ОТ</span></dt>
+        <dd class="v3-value"><span class="v3-val-pre">от</span>25<span class="v3-unit">м²</span></dd>
+      </div>
+      <div class="v3-spec">
+        <dt class="v3-spec-top"><span class="v3-index">03</span><span class="v3-label">ЭТАЖНОСТЬ</span></dt>
+        <dd class="v3-value">35</dd>
+      </div>
+      <div class="v3-spec">
+        <dt class="v3-spec-top"><span class="v3-index">04</span><span class="v3-label">КВАРТИР В ПРОДАЖЕ / ВСЕГО</span></dt>
+        <dd class="v3-value">371<span class="v3-val-sep">/</span>371</dd>
+      </div>
+      <div class="v3-spec">
+        <dt class="v3-spec-top"><span class="v3-index">05</span><span class="v3-label">СРОК СДАЧИ</span></dt>
+        <dd class="v3-value">I кв. 2027</dd>
+      </div>
+      <div class="v3-spec">
+        <dt class="v3-spec-top"><span class="v3-index">06</span><span class="v3-label">ДО КРЕМЛЯ</span></dt>
+        <dd class="v3-value">11,7<span class="v3-unit">км</span></dd>
+      </div>
+      <div class="v3-spec v3-spec--tag">
+        <dt class="v3-spec-top"><span class="v3-index">07</span><span class="v3-label">БЛИЖАЙШЕЕ МЕТРО</span></dt>
+        <dd class="v3-value"><span class="v3-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9" r="2.4" fill="currentColor"/></svg>Балтийская</span></dd>
+      </div>
+      <div class="v3-spec v3-spec--tag">
+        <dt class="v3-spec-top"><span class="v3-index">08</span><span class="v3-label">ПОДЗЕМНЫЙ ПАРКИНГ</span></dt>
+        <dd class="v3-value"><span class="v3-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5 11-12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Да</span></dd>
+      </div>
+    </dl>
+  </div>
+</div></div></div></div></div></section><section class="variant"><div class="vhead"><div class="vindex">04</div><div class="vmeta"><h2 class="vname">Атмосферное стекло</h2><div class="vtag">Глассморфизм · глубина</div><p class="vrat">Морозное многослойное стекло поверх глубокого сине-золотого свечения: цена доминирует на самой выдвинутой панели-гиганте, а метро, паркинг и расстояние до Кремля вынесены в стеклянные чипы с иконками, создавая ощущение реальной глубины, а не плоской сетки карточек.</p></div><div class="vswatch" aria-hidden="true"><span style="background:#041018"></span><span style="background:#0EA5E9"></span><span style="background:#C2A87A"></span></div></div><div class="stage"><div class="rail"><div class="device"><div class="dlabel">Mobile <span class="dw">375px</span><span class="bar"></span></div><div class="viewport" style="width:375px"><div class="v4-root">
+  <div class="v4-atmos" aria-hidden="true">
+    <span class="v4-blob v4-blob--gold"></span>
+    <span class="v4-blob v4-blob--sky"></span>
+    <svg class="v4-grain" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <filter id="v4noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+      <rect width="100%" height="100%" filter="url(#v4noise)"/>
+    </svg>
+  </div>
+
+  <header class="v4-head">
+    <h2 class="v4-title">Условия покупки и параметры дома</h2>
+    <div class="v4-params">
+      <span class="v4-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16M6 21V5l6-2 6 2v16M10 9h1m3 0h1M10 13h1m3 0h1"/></svg>
+        <span class="v4-pill-k">Тип дома</span>
+        <span class="v4-pill-v">Монолитный</span>
+      </span>
+      <span class="v4-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5M3 16l9 5 9-5"/></svg>
+        <span class="v4-pill-k">Минимальная очередь</span>
+        <span class="v4-pill-v">1</span>
+      </span>
+    </div>
+  </header>
+
+  <div class="v4-grid">
+    <article class="v4-card v4-price" style="grid-area:price">
+      <span class="v4-price-label">Цена от</span>
+      <span class="v4-price-val">17 722 630 ₽</span>
+    </article>
+
+    <article class="v4-card v4-stat" style="grid-area:area">
+      <span class="v4-k">Площадь от</span>
+      <span class="v4-v">от 25 м²</span>
+    </article>
+
+    <article class="v4-card v4-stat" style="grid-area:floors">
+      <span class="v4-k">Этажность</span>
+      <span class="v4-v">35</span>
+    </article>
+
+    <article class="v4-card v4-stat" style="grid-area:units">
+      <span class="v4-k">Квартир в продаже / всего</span>
+      <span class="v4-v">371 / 371</span>
+    </article>
+
+    <article class="v4-card v4-stat" style="grid-area:deadline">
+      <span class="v4-k">Срок сдачи</span>
+      <span class="v4-v">I кв. 2027</span>
+    </article>
+
+    <article class="v4-card v4-chip v4-chip--kremlin" style="grid-area:kremlin">
+      <span class="v4-glyph"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 L14.23 8.93 L20.56 9.22 L15.61 13.17 L16.29 19.28 L12 15.8 L7.71 19.28 L8.39 13.17 L3.44 9.22 L9.77 8.93 Z"/></svg></span>
+      <span class="v4-ct"><span class="v4-k">До Кремля</span><span class="v4-v">11,7 км</span></span>
+    </article>
+
+    <article class="v4-card v4-chip v4-chip--metro" style="grid-area:metro">
+      <span class="v4-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18V6l4 6 4-6v12"/></svg></span>
+      <span class="v4-ct"><span class="v4-k">Ближайшее метро</span><span class="v4-v">Балтийская</span></span>
+    </article>
+
+    <article class="v4-card v4-chip v4-chip--parking" style="grid-area:parking">
+      <span class="v4-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 19V5h4.5a4 4 0 0 1 0 8H8"/></svg></span>
+      <span class="v4-ct"><span class="v4-k">Подземный паркинг</span><span class="v4-v">Да</span></span>
+    </article>
+  </div>
+</div></div></div><div class="device"><div class="dlabel">Tablet <span class="dw">768px</span><span class="bar"></span></div><div class="viewport" style="width:768px"><div class="v4-root">
+  <div class="v4-atmos" aria-hidden="true">
+    <span class="v4-blob v4-blob--gold"></span>
+    <span class="v4-blob v4-blob--sky"></span>
+    <svg class="v4-grain" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <filter id="v4noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+      <rect width="100%" height="100%" filter="url(#v4noise)"/>
+    </svg>
+  </div>
+
+  <header class="v4-head">
+    <h2 class="v4-title">Условия покупки и параметры дома</h2>
+    <div class="v4-params">
+      <span class="v4-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16M6 21V5l6-2 6 2v16M10 9h1m3 0h1M10 13h1m3 0h1"/></svg>
+        <span class="v4-pill-k">Тип дома</span>
+        <span class="v4-pill-v">Монолитный</span>
+      </span>
+      <span class="v4-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5M3 16l9 5 9-5"/></svg>
+        <span class="v4-pill-k">Минимальная очередь</span>
+        <span class="v4-pill-v">1</span>
+      </span>
+    </div>
+  </header>
+
+  <div class="v4-grid">
+    <article class="v4-card v4-price" style="grid-area:price">
+      <span class="v4-price-label">Цена от</span>
+      <span class="v4-price-val">17 722 630 ₽</span>
+    </article>
+
+    <article class="v4-card v4-stat" style="grid-area:area">
+      <span class="v4-k">Площадь от</span>
+      <span class="v4-v">от 25 м²</span>
+    </article>
+
+    <article class="v4-card v4-stat" style="grid-area:floors">
+      <span class="v4-k">Этажность</span>
+      <span class="v4-v">35</span>
+    </article>
+
+    <article class="v4-card v4-stat" style="grid-area:units">
+      <span class="v4-k">Квартир в продаже / всего</span>
+      <span class="v4-v">371 / 371</span>
+    </article>
+
+    <article class="v4-card v4-stat" style="grid-area:deadline">
+      <span class="v4-k">Срок сдачи</span>
+      <span class="v4-v">I кв. 2027</span>
+    </article>
+
+    <article class="v4-card v4-chip v4-chip--kremlin" style="grid-area:kremlin">
+      <span class="v4-glyph"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 L14.23 8.93 L20.56 9.22 L15.61 13.17 L16.29 19.28 L12 15.8 L7.71 19.28 L8.39 13.17 L3.44 9.22 L9.77 8.93 Z"/></svg></span>
+      <span class="v4-ct"><span class="v4-k">До Кремля</span><span class="v4-v">11,7 км</span></span>
+    </article>
+
+    <article class="v4-card v4-chip v4-chip--metro" style="grid-area:metro">
+      <span class="v4-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18V6l4 6 4-6v12"/></svg></span>
+      <span class="v4-ct"><span class="v4-k">Ближайшее метро</span><span class="v4-v">Балтийская</span></span>
+    </article>
+
+    <article class="v4-card v4-chip v4-chip--parking" style="grid-area:parking">
+      <span class="v4-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 19V5h4.5a4 4 0 0 1 0 8H8"/></svg></span>
+      <span class="v4-ct"><span class="v4-k">Подземный паркинг</span><span class="v4-v">Да</span></span>
+    </article>
+  </div>
+</div></div></div></div><div class="rail desk"><div class="device"><div class="dlabel">Desktop <span class="dw">1200px</span><span class="bar"></span></div><div class="viewport" style="width:1200px"><div class="v4-root">
+  <div class="v4-atmos" aria-hidden="true">
+    <span class="v4-blob v4-blob--gold"></span>
+    <span class="v4-blob v4-blob--sky"></span>
+    <svg class="v4-grain" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <filter id="v4noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+      <rect width="100%" height="100%" filter="url(#v4noise)"/>
+    </svg>
+  </div>
+
+  <header class="v4-head">
+    <h2 class="v4-title">Условия покупки и параметры дома</h2>
+    <div class="v4-params">
+      <span class="v4-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16M6 21V5l6-2 6 2v16M10 9h1m3 0h1M10 13h1m3 0h1"/></svg>
+        <span class="v4-pill-k">Тип дома</span>
+        <span class="v4-pill-v">Монолитный</span>
+      </span>
+      <span class="v4-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5M3 16l9 5 9-5"/></svg>
+        <span class="v4-pill-k">Минимальная очередь</span>
+        <span class="v4-pill-v">1</span>
+      </span>
+    </div>
+  </header>
+
+  <div class="v4-grid">
+    <article class="v4-card v4-price" style="grid-area:price">
+      <span class="v4-price-label">Цена от</span>
+      <span class="v4-price-val">17 722 630 ₽</span>
+    </article>
+
+    <article class="v4-card v4-stat" style="grid-area:area">
+      <span class="v4-k">Площадь от</span>
+      <span class="v4-v">от 25 м²</span>
+    </article>
+
+    <article class="v4-card v4-stat" style="grid-area:floors">
+      <span class="v4-k">Этажность</span>
+      <span class="v4-v">35</span>
+    </article>
+
+    <article class="v4-card v4-stat" style="grid-area:units">
+      <span class="v4-k">Квартир в продаже / всего</span>
+      <span class="v4-v">371 / 371</span>
+    </article>
+
+    <article class="v4-card v4-stat" style="grid-area:deadline">
+      <span class="v4-k">Срок сдачи</span>
+      <span class="v4-v">I кв. 2027</span>
+    </article>
+
+    <article class="v4-card v4-chip v4-chip--kremlin" style="grid-area:kremlin">
+      <span class="v4-glyph"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 L14.23 8.93 L20.56 9.22 L15.61 13.17 L16.29 19.28 L12 15.8 L7.71 19.28 L8.39 13.17 L3.44 9.22 L9.77 8.93 Z"/></svg></span>
+      <span class="v4-ct"><span class="v4-k">До Кремля</span><span class="v4-v">11,7 км</span></span>
+    </article>
+
+    <article class="v4-card v4-chip v4-chip--metro" style="grid-area:metro">
+      <span class="v4-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18V6l4 6 4-6v12"/></svg></span>
+      <span class="v4-ct"><span class="v4-k">Ближайшее метро</span><span class="v4-v">Балтийская</span></span>
+    </article>
+
+    <article class="v4-card v4-chip v4-chip--parking" style="grid-area:parking">
+      <span class="v4-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 19V5h4.5a4 4 0 0 1 0 8H8"/></svg></span>
+      <span class="v4-ct"><span class="v4-k">Подземный паркинг</span><span class="v4-v">Да</span></span>
+    </article>
+  </div>
+</div></div></div></div></div></section><section class="variant"><div class="vhead"><div class="vindex">05</div><div class="vmeta"><h2 class="vname">Operator KPI Cockpit</h2><div class="vtag">Дата-дашборд · приборный</div><p class="vrat">Характеристики ЖК поданы как операторский дашборд: цена — главный KPI, а «квартиры», «срок сдачи» и «до Кремля» превращены в прогресс-метр, таймлайн кварталов и радиальный гейдж на тёмной технической поверхности с золотом и небесно-синим как второй семантический цвет.</p></div><div class="vswatch" aria-hidden="true"><span style="background:#0B1620"></span><span style="background:#C2A87A"></span><span style="background:#0EA5E9"></span></div></div><div class="stage"><div class="rail"><div class="device"><div class="dlabel">Mobile <span class="dw">375px</span><span class="bar"></span></div><div class="viewport" style="width:375px"><div class="v5-root">
+  <div class="v5-frame">
+    <header class="v5-head">
+      <div class="v5-head-main">
+        <span class="v5-kicker">// параметры объекта</span>
+        <h2 class="v5-title">Условия покупки и параметры дома</h2>
+      </div>
+      <div class="v5-statusbar">
+        <div class="v5-chip"><span class="v5-chip-k">Тип дома</span><span class="v5-chip-v">Монолитный</span></div>
+        <div class="v5-chip"><span class="v5-chip-k">Мин. очередь</span><span class="v5-chip-v">1</span></div>
+        <div class="v5-live"><span class="v5-live-dot"></span><span>данные актуальны</span></div>
+      </div>
+    </header>
+
+    <div class="v5-grid">
+      <article class="v5-card v5-card--price v5-c-price">
+        <div class="v5-card-top"><span class="v5-label">Цена от</span><span class="v5-idx">01</span></div>
+        <div class="v5-price"><span class="v5-price-num">17 722 630</span><span class="v5-price-cur">₽</span></div>
+        <div class="v5-price-sub"><span>стартовая стоимость лота</span><span class="v5-price-bar"></span></div>
+      </article>
+
+      <article class="v5-card v5-c-area">
+        <div class="v5-card-top"><span class="v5-label">Площадь от</span><span class="v5-idx">02</span></div>
+        <div class="v5-stat"><span class="v5-stat-pre">от</span><span class="v5-stat-num">25</span><span class="v5-unit">м²</span></div>
+        <svg class="v5-spark" viewBox="0 0 120 26" preserveAspectRatio="none" aria-hidden="true">
+          <polyline class="v5-spark-line" points="0,21 20,17 40,19 60,11 80,13 100,5 120,7"/>
+          <circle class="v5-spark-dot" cx="100" cy="5" r="2.6"/>
+        </svg>
+      </article>
+
+      <article class="v5-card v5-c-floors">
+        <div class="v5-card-top"><span class="v5-label">Этажность</span><span class="v5-idx">03</span></div>
+        <div class="v5-stat"><span class="v5-stat-num">35</span><span class="v5-stat-suf">этажей</span></div>
+        <svg class="v5-bars" viewBox="0 0 120 30" preserveAspectRatio="none" aria-hidden="true">
+          <rect class="v5-bar" x="3"   y="22" width="9" height="8"/>
+          <rect class="v5-bar" x="16"  y="20" width="9" height="10"/>
+          <rect class="v5-bar" x="29"  y="18" width="9" height="12"/>
+          <rect class="v5-bar" x="42"  y="15" width="9" height="15"/>
+          <rect class="v5-bar" x="55"  y="12" width="9" height="18"/>
+          <rect class="v5-bar" x="68"  y="9"  width="9" height="21"/>
+          <rect class="v5-bar" x="81"  y="6"  width="9" height="24"/>
+          <rect class="v5-bar" x="94"  y="3"  width="9" height="27"/>
+          <rect class="v5-bar v5-bar--last" x="107" y="0" width="9" height="30"/>
+        </svg>
+      </article>
+
+      <article class="v5-card v5-c-units">
+        <div class="v5-card-top"><span class="v5-label">Квартир в продаже / всего</span><span class="v5-idx">04</span></div>
+        <div class="v5-meter-head">
+          <span class="v5-meter-read"><b>371</b> / 371</span>
+          <span class="v5-meter-pct">100%</span>
+        </div>
+        <div class="v5-meter"><div class="v5-meter-fill"></div></div>
+        <div class="v5-meter-foot"><span>в продаже</span><span>доступно к бронированию</span></div>
+      </article>
+
+      <article class="v5-card v5-c-deadline">
+        <div class="v5-card-top"><span class="v5-label">Срок сдачи</span><span class="v5-idx">05</span></div>
+        <div class="v5-deadline"><span class="v5-deadline-val">I кв.</span><span class="v5-deadline-year">2027</span></div>
+        <div class="v5-timeline">
+          <div class="v5-tl-line"></div>
+          <div class="v5-tl-nodes">
+            <div class="v5-tl-node v5-tl-on"><span class="v5-tl-dot"></span><span class="v5-tl-q">I</span></div>
+            <div class="v5-tl-node"><span class="v5-tl-dot"></span><span class="v5-tl-q">II</span></div>
+            <div class="v5-tl-node"><span class="v5-tl-dot"></span><span class="v5-tl-q">III</span></div>
+            <div class="v5-tl-node"><span class="v5-tl-dot"></span><span class="v5-tl-q">IV</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="v5-card v5-c-kremlin v5-card--center">
+        <div class="v5-card-top"><span class="v5-label">До Кремля</span><span class="v5-idx">06</span></div>
+        <div class="v5-gauge-wrap">
+          <svg class="v5-gauge" viewBox="0 0 88 88" aria-hidden="true">
+            <circle class="v5-gauge-track" cx="44" cy="44" r="34"/>
+            <circle class="v5-gauge-arc" cx="44" cy="44" r="34"/>
+          </svg>
+          <div class="v5-gauge-read"><span class="v5-gauge-num">11,7</span><span class="v5-gauge-unit">км</span></div>
+        </div>
+      </article>
+
+      <article class="v5-card v5-c-metro">
+        <div class="v5-card-top"><span class="v5-label">Ближайшее метро</span><span class="v5-idx">07</span></div>
+        <div class="v5-metro">
+          <span class="v5-metro-glyph">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 18V7l8 7 8-7v11" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div class="v5-metro-info">
+            <span class="v5-metro-name">Балтийская</span>
+            <span class="v5-metro-sub">станция рядом</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="v5-card v5-c-parking">
+        <div class="v5-card-top"><span class="v5-label">Подземный паркинг</span><span class="v5-idx">08</span></div>
+        <div class="v5-pill">
+          <span class="v5-pill-check"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.2 4.3L19 7" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="v5-pill-t">Да</span>
+          <span class="v5-pill-s">в наличии</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</div></div></div><div class="device"><div class="dlabel">Tablet <span class="dw">768px</span><span class="bar"></span></div><div class="viewport" style="width:768px"><div class="v5-root">
+  <div class="v5-frame">
+    <header class="v5-head">
+      <div class="v5-head-main">
+        <span class="v5-kicker">// параметры объекта</span>
+        <h2 class="v5-title">Условия покупки и параметры дома</h2>
+      </div>
+      <div class="v5-statusbar">
+        <div class="v5-chip"><span class="v5-chip-k">Тип дома</span><span class="v5-chip-v">Монолитный</span></div>
+        <div class="v5-chip"><span class="v5-chip-k">Мин. очередь</span><span class="v5-chip-v">1</span></div>
+        <div class="v5-live"><span class="v5-live-dot"></span><span>данные актуальны</span></div>
+      </div>
+    </header>
+
+    <div class="v5-grid">
+      <article class="v5-card v5-card--price v5-c-price">
+        <div class="v5-card-top"><span class="v5-label">Цена от</span><span class="v5-idx">01</span></div>
+        <div class="v5-price"><span class="v5-price-num">17 722 630</span><span class="v5-price-cur">₽</span></div>
+        <div class="v5-price-sub"><span>стартовая стоимость лота</span><span class="v5-price-bar"></span></div>
+      </article>
+
+      <article class="v5-card v5-c-area">
+        <div class="v5-card-top"><span class="v5-label">Площадь от</span><span class="v5-idx">02</span></div>
+        <div class="v5-stat"><span class="v5-stat-pre">от</span><span class="v5-stat-num">25</span><span class="v5-unit">м²</span></div>
+        <svg class="v5-spark" viewBox="0 0 120 26" preserveAspectRatio="none" aria-hidden="true">
+          <polyline class="v5-spark-line" points="0,21 20,17 40,19 60,11 80,13 100,5 120,7"/>
+          <circle class="v5-spark-dot" cx="100" cy="5" r="2.6"/>
+        </svg>
+      </article>
+
+      <article class="v5-card v5-c-floors">
+        <div class="v5-card-top"><span class="v5-label">Этажность</span><span class="v5-idx">03</span></div>
+        <div class="v5-stat"><span class="v5-stat-num">35</span><span class="v5-stat-suf">этажей</span></div>
+        <svg class="v5-bars" viewBox="0 0 120 30" preserveAspectRatio="none" aria-hidden="true">
+          <rect class="v5-bar" x="3"   y="22" width="9" height="8"/>
+          <rect class="v5-bar" x="16"  y="20" width="9" height="10"/>
+          <rect class="v5-bar" x="29"  y="18" width="9" height="12"/>
+          <rect class="v5-bar" x="42"  y="15" width="9" height="15"/>
+          <rect class="v5-bar" x="55"  y="12" width="9" height="18"/>
+          <rect class="v5-bar" x="68"  y="9"  width="9" height="21"/>
+          <rect class="v5-bar" x="81"  y="6"  width="9" height="24"/>
+          <rect class="v5-bar" x="94"  y="3"  width="9" height="27"/>
+          <rect class="v5-bar v5-bar--last" x="107" y="0" width="9" height="30"/>
+        </svg>
+      </article>
+
+      <article class="v5-card v5-c-units">
+        <div class="v5-card-top"><span class="v5-label">Квартир в продаже / всего</span><span class="v5-idx">04</span></div>
+        <div class="v5-meter-head">
+          <span class="v5-meter-read"><b>371</b> / 371</span>
+          <span class="v5-meter-pct">100%</span>
+        </div>
+        <div class="v5-meter"><div class="v5-meter-fill"></div></div>
+        <div class="v5-meter-foot"><span>в продаже</span><span>доступно к бронированию</span></div>
+      </article>
+
+      <article class="v5-card v5-c-deadline">
+        <div class="v5-card-top"><span class="v5-label">Срок сдачи</span><span class="v5-idx">05</span></div>
+        <div class="v5-deadline"><span class="v5-deadline-val">I кв.</span><span class="v5-deadline-year">2027</span></div>
+        <div class="v5-timeline">
+          <div class="v5-tl-line"></div>
+          <div class="v5-tl-nodes">
+            <div class="v5-tl-node v5-tl-on"><span class="v5-tl-dot"></span><span class="v5-tl-q">I</span></div>
+            <div class="v5-tl-node"><span class="v5-tl-dot"></span><span class="v5-tl-q">II</span></div>
+            <div class="v5-tl-node"><span class="v5-tl-dot"></span><span class="v5-tl-q">III</span></div>
+            <div class="v5-tl-node"><span class="v5-tl-dot"></span><span class="v5-tl-q">IV</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="v5-card v5-c-kremlin v5-card--center">
+        <div class="v5-card-top"><span class="v5-label">До Кремля</span><span class="v5-idx">06</span></div>
+        <div class="v5-gauge-wrap">
+          <svg class="v5-gauge" viewBox="0 0 88 88" aria-hidden="true">
+            <circle class="v5-gauge-track" cx="44" cy="44" r="34"/>
+            <circle class="v5-gauge-arc" cx="44" cy="44" r="34"/>
+          </svg>
+          <div class="v5-gauge-read"><span class="v5-gauge-num">11,7</span><span class="v5-gauge-unit">км</span></div>
+        </div>
+      </article>
+
+      <article class="v5-card v5-c-metro">
+        <div class="v5-card-top"><span class="v5-label">Ближайшее метро</span><span class="v5-idx">07</span></div>
+        <div class="v5-metro">
+          <span class="v5-metro-glyph">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 18V7l8 7 8-7v11" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div class="v5-metro-info">
+            <span class="v5-metro-name">Балтийская</span>
+            <span class="v5-metro-sub">станция рядом</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="v5-card v5-c-parking">
+        <div class="v5-card-top"><span class="v5-label">Подземный паркинг</span><span class="v5-idx">08</span></div>
+        <div class="v5-pill">
+          <span class="v5-pill-check"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.2 4.3L19 7" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="v5-pill-t">Да</span>
+          <span class="v5-pill-s">в наличии</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</div></div></div></div><div class="rail desk"><div class="device"><div class="dlabel">Desktop <span class="dw">1200px</span><span class="bar"></span></div><div class="viewport" style="width:1200px"><div class="v5-root">
+  <div class="v5-frame">
+    <header class="v5-head">
+      <div class="v5-head-main">
+        <span class="v5-kicker">// параметры объекта</span>
+        <h2 class="v5-title">Условия покупки и параметры дома</h2>
+      </div>
+      <div class="v5-statusbar">
+        <div class="v5-chip"><span class="v5-chip-k">Тип дома</span><span class="v5-chip-v">Монолитный</span></div>
+        <div class="v5-chip"><span class="v5-chip-k">Мин. очередь</span><span class="v5-chip-v">1</span></div>
+        <div class="v5-live"><span class="v5-live-dot"></span><span>данные актуальны</span></div>
+      </div>
+    </header>
+
+    <div class="v5-grid">
+      <article class="v5-card v5-card--price v5-c-price">
+        <div class="v5-card-top"><span class="v5-label">Цена от</span><span class="v5-idx">01</span></div>
+        <div class="v5-price"><span class="v5-price-num">17 722 630</span><span class="v5-price-cur">₽</span></div>
+        <div class="v5-price-sub"><span>стартовая стоимость лота</span><span class="v5-price-bar"></span></div>
+      </article>
+
+      <article class="v5-card v5-c-area">
+        <div class="v5-card-top"><span class="v5-label">Площадь от</span><span class="v5-idx">02</span></div>
+        <div class="v5-stat"><span class="v5-stat-pre">от</span><span class="v5-stat-num">25</span><span class="v5-unit">м²</span></div>
+        <svg class="v5-spark" viewBox="0 0 120 26" preserveAspectRatio="none" aria-hidden="true">
+          <polyline class="v5-spark-line" points="0,21 20,17 40,19 60,11 80,13 100,5 120,7"/>
+          <circle class="v5-spark-dot" cx="100" cy="5" r="2.6"/>
+        </svg>
+      </article>
+
+      <article class="v5-card v5-c-floors">
+        <div class="v5-card-top"><span class="v5-label">Этажность</span><span class="v5-idx">03</span></div>
+        <div class="v5-stat"><span class="v5-stat-num">35</span><span class="v5-stat-suf">этажей</span></div>
+        <svg class="v5-bars" viewBox="0 0 120 30" preserveAspectRatio="none" aria-hidden="true">
+          <rect class="v5-bar" x="3"   y="22" width="9" height="8"/>
+          <rect class="v5-bar" x="16"  y="20" width="9" height="10"/>
+          <rect class="v5-bar" x="29"  y="18" width="9" height="12"/>
+          <rect class="v5-bar" x="42"  y="15" width="9" height="15"/>
+          <rect class="v5-bar" x="55"  y="12" width="9" height="18"/>
+          <rect class="v5-bar" x="68"  y="9"  width="9" height="21"/>
+          <rect class="v5-bar" x="81"  y="6"  width="9" height="24"/>
+          <rect class="v5-bar" x="94"  y="3"  width="9" height="27"/>
+          <rect class="v5-bar v5-bar--last" x="107" y="0" width="9" height="30"/>
+        </svg>
+      </article>
+
+      <article class="v5-card v5-c-units">
+        <div class="v5-card-top"><span class="v5-label">Квартир в продаже / всего</span><span class="v5-idx">04</span></div>
+        <div class="v5-meter-head">
+          <span class="v5-meter-read"><b>371</b> / 371</span>
+          <span class="v5-meter-pct">100%</span>
+        </div>
+        <div class="v5-meter"><div class="v5-meter-fill"></div></div>
+        <div class="v5-meter-foot"><span>в продаже</span><span>доступно к бронированию</span></div>
+      </article>
+
+      <article class="v5-card v5-c-deadline">
+        <div class="v5-card-top"><span class="v5-label">Срок сдачи</span><span class="v5-idx">05</span></div>
+        <div class="v5-deadline"><span class="v5-deadline-val">I кв.</span><span class="v5-deadline-year">2027</span></div>
+        <div class="v5-timeline">
+          <div class="v5-tl-line"></div>
+          <div class="v5-tl-nodes">
+            <div class="v5-tl-node v5-tl-on"><span class="v5-tl-dot"></span><span class="v5-tl-q">I</span></div>
+            <div class="v5-tl-node"><span class="v5-tl-dot"></span><span class="v5-tl-q">II</span></div>
+            <div class="v5-tl-node"><span class="v5-tl-dot"></span><span class="v5-tl-q">III</span></div>
+            <div class="v5-tl-node"><span class="v5-tl-dot"></span><span class="v5-tl-q">IV</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="v5-card v5-c-kremlin v5-card--center">
+        <div class="v5-card-top"><span class="v5-label">До Кремля</span><span class="v5-idx">06</span></div>
+        <div class="v5-gauge-wrap">
+          <svg class="v5-gauge" viewBox="0 0 88 88" aria-hidden="true">
+            <circle class="v5-gauge-track" cx="44" cy="44" r="34"/>
+            <circle class="v5-gauge-arc" cx="44" cy="44" r="34"/>
+          </svg>
+          <div class="v5-gauge-read"><span class="v5-gauge-num">11,7</span><span class="v5-gauge-unit">км</span></div>
+        </div>
+      </article>
+
+      <article class="v5-card v5-c-metro">
+        <div class="v5-card-top"><span class="v5-label">Ближайшее метро</span><span class="v5-idx">07</span></div>
+        <div class="v5-metro">
+          <span class="v5-metro-glyph">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 18V7l8 7 8-7v11" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div class="v5-metro-info">
+            <span class="v5-metro-name">Балтийская</span>
+            <span class="v5-metro-sub">станция рядом</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="v5-card v5-c-parking">
+        <div class="v5-card-top"><span class="v5-label">Подземный паркинг</span><span class="v5-idx">08</span></div>
+        <div class="v5-pill">
+          <span class="v5-pill-check"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.2 4.3L19 7" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="v5-pill-t">Да</span>
+          <span class="v5-pill-s">в наличии</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</div></div></div></div></div></section><footer class="footer">Горизонтальная прокрутка рядов — норма: фреймы имеют фиксированную ширину. Реализация в проде — Tailwind внутри <code>ComplexView.tsx:349</code> (сейчас: <code>rounded-3xl border border-white/10</code>, сетка <code>lg:grid-cols-[280px_1fr]</code>). Выбранное направление переносится на реальные брейкпоинты <code>sm/md/lg/xl</code>. Скажи номер понравившегося — соберу его на реальных данных и внедрю.</footer></div></div>
+</body>
+</html>

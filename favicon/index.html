@@ -261,11 +261,6 @@
 
   .variant:hover { transform: translateY(-2px); border-color: var(--rule-strong); }
 
-  .variant[data-pick='true'] {
-    border-color: var(--gold);
-    box-shadow: var(--shadow), 0 0 0 1px var(--gold);
-  }
-
   .variant-top {
     display: flex;
     align-items: flex-start;
@@ -309,18 +304,6 @@
     color: var(--fg-dim);
     font-size: 0.9rem;
     line-height: 1.5;
-  }
-
-  .pick-flag {
-    align-self: flex-start;
-    padding: 0.15rem 0.5rem;
-    background: var(--gold);
-    color: var(--ink);
-    font-size: 0.62rem;
-    font-weight: 800;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-    border-radius: 2px;
   }
 
   /* ── Мокапы вкладки ───────────────────────────────────────────────────── */
@@ -670,13 +653,12 @@
         <p class="verdict"><span class="verdict-key mono">16px</span><span>Буквы так же слипаются. Подложка чётко очерчена в светлой вкладке и слегка тонет в тёмной, но золото остаётся видно в обоих случаях.</span></p>
       </article>
 
-      <article class="variant" data-pick="true">
+      <article class="variant">
         <div class="variant-top">
           <svg class="variant-hero" viewBox="0 0 64 64" role="img" aria-label="Вариант 03">
             <use href="#v-03" width="64" height="64"/>
           </svg>
           <div class="variant-meta">
-            <span class="pick-flag">Рекомендую</span>
             <span class="variant-no mono">03</span>
             <span class="variant-name">Инициал</span>
             <span class="variant-desc">Одна буква R во всю высоту. Меньше деталей — больше воздуха внутри знака.</span>
@@ -706,7 +688,7 @@
             </div>
           </div>
         </div>
-        <p class="verdict"><span class="verdict-key mono">16px</span><span>Буква остаётся буквой: видно и вырез внутри, и ножку. Единственный вариант, который в закладках не превращается в абстрактное пятно.</span></p>
+        <p class="verdict"><span class="verdict-key mono">16px</span><span>Буква остаётся буквой: видно и вырез внутри, и ножку. Деталей мало, поэтому уменьшение проходит без потерь.</span></p>
       </article>
 
       <article class="variant">
